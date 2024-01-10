@@ -13,8 +13,8 @@
     <p>place holder</p>
     <div class="wrapper_sticks_to_bottom_right">
       <div class="clickable_icon_stack">
-        <img id="upload" class="clickable_icon" src="../static/images/upload_icon.svg" alt="Upload icon" />
-        <img id="save" class="clickable_icon" src="../static/images/save_icon.svg" alt="Save icon" />
+        <img id="upload" class="clickable_icon" src="{{ url_for('static', filename = 'images/upload_icon.svg') }}" alt="Upload icon" />
+        <img id="save" class="clickable_icon" src="{{ url_for('static', filename = 'images/save_icon.svg') }}" alt="Save icon" />
       </div>
     </div>
   </body>

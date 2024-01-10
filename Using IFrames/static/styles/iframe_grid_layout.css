@@ -1,5 +1,6 @@
 html,
 body {
+    /* Ensure html tag and body tag take entire window viewport */
     height: 100%;
     margin: 0;
 }

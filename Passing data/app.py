@@ -12,8 +12,8 @@ def index():
 def receive_data():
     print(request.method)
     if request.method == "GET":
-        # We dont want to return anything
-        return ""
+        # This method is not a resource, simply show html
+        return render_template("receiver.html")
 
     try:
         data = request.json

@@ -30,6 +30,7 @@ function sessionStorageMethod() {
 
 function cookieMethod() {
     // Read cookie data
+    var cookies = document.cookie.split(';');
     var cookie_json_data = document.cookie;
     var decoded_json_data = decodeURIComponent(cookie_json_data);
     var parsed_data = JSON.parse(decoded_json_data);

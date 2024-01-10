@@ -35,8 +35,11 @@ function sessionStorageMethod(inputData) {
 }
 
 function cookieMethod(inputData) {
-    // Save small data into cookies, a cookie expires after a set amount of time.
+    // Save small data into cookies
+    // cookies are separated by ;
+    // We can add an expiration data
     var json_data = JSON.stringify(inputData);
-    document.cookie = `data=${encodeURIComponent(json_data)}`;
+    // Add expiration date, add path to clear cookie from entire domain once expires
+    document.cookie = `${encodeURIComponent(json_data)}; expires=Thu, 01 Jan 2030 00:00:00 UTC; path=/;`;
     window.location.href = 'receiver.html';
 }

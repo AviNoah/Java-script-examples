@@ -40,6 +40,29 @@ function cookieMethod(inputData) {
     // We can add an expiration data
     var json_data = JSON.stringify(inputData);
     // Add expiration date, add path to clear cookie from entire domain once expires
-    document.cookie = `${encodeURIComponent(json_data)}; expires=Thu, 01 Jan 2030 00:00:00 UTC; path=/;`;
+    document.cookie = `${encodeURIComponent(json_data)}; expires=Thu, 01 Jan 2020 00:00:00 UTC; path=/;`;
     window.location.href = 'receiver.html';
+}
+
+// Sending data to the backend server (Python)
+// Since the server can't directly access the client's local storage, data is sent via fetch requests.
+// The backend server then handles the received data and processes it accordingly.
+
+function POSTMethod(inputData) {
+    // This sends a POST request to the 'receiver.html' resource on the backend.
+
+    // The fetch function returns a Promise object, allowing us to handle the result or failure.
+    fetch('receiver.html', {
+        // 'POST' is used to send data to a resource. Other methods include 'GET', 'DELETE', 'PATCH', 'OPTIONS', and 'HEAD'.
+        method: 'POST',
+        // Headers specify the content type being sent (in this case, JSON).
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // The body contains the data to be sent, stringified as JSON.
+        body: JSON.stringify(inputData)
+    })
+        .then(response => response.json()) // Try to parse the response body as JSON.
+        .then(data => console.log(data))  // Log the parsed data. If parsing fails, this will be a failed Promise.
+        .catch(error => console.error(error)); // Catch and log any errors that occurred in the Promise chain.
 }

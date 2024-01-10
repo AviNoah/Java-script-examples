@@ -16,6 +16,7 @@ function URLParametersMethod(inputData) {
 
 function localStorageMethod(inputData) {
     // Save into local storage under the key data
+    // Data will stay stored in browser data regardless of server state
     localStorage.setItem('data', inputData)
     window.location.href = 'receiver.html'
 }

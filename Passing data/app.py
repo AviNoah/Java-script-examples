@@ -14,7 +14,8 @@ def receive_data():
     if request.method == "GET":
         # This method is not a resource, simply show html
         return render_template("receiver.html")
-
+    elif request.method != "POST":
+        raise Exception(f"Unimplemented method {request.method} for receive_data")
     try:
         data = request.json
 

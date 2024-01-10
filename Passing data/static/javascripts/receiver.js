@@ -6,6 +6,8 @@ function receive(option) {
             return localStorageMethod();
         case 3:
             return sessionStorageMethod();
+        case 4:
+            return cookieMethod();
     }
 }
 
@@ -13,15 +15,26 @@ function URLParametersMethod() {
     // Read URL Parameters
     var urlParams = new URLSearchParams(window.location.search);
     var receivedData = urlParams.get('data');
-    return receivedData
+    return receivedData;
 }
 
 function localStorageMethod() {
     // Read local storage
-    return localStorage.getItem('data')
+    return localStorage.getItem('data');
 }
 
-function sessionStorageMethod(inputData) {
+function sessionStorageMethod() {
     // Read local session storage
     return sessionStorage.getItem('data', inputData);
+}
+
+function cookieMethod() {
+    // Read cookie data
+    var cookie_json_data = document.cookie;
+    var decoded_json_data = decodeURIComponent(cookie_json_data);
+    var parsed_data = JSON.parse(decoded_json_data);
+
+    console.log(parsed_data);
+    // Parse the JSON string back to an object
+    return decoded_json_data;
 }

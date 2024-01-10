@@ -1,7 +1,7 @@
 function receive(option) {
     switch (option) {
         case 1:
-            return URLParametersMethod(inputData);
+            return URLParametersMethod();
 
     }
 }

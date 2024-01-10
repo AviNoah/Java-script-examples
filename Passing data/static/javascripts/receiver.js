@@ -4,6 +4,8 @@ function receive(option) {
             return URLParametersMethod();
         case 2:
             return localStorageMethod();
+        case 3:
+            return sessionStorageMethod();
     }
 }
 
@@ -17,4 +19,9 @@ function URLParametersMethod() {
 function localStorageMethod() {
     // Read local storage
     return localStorage.getItem('data')
+}
+
+function sessionStorageMethod(inputData) {
+    // Read local session storage
+    return sessionStorage.getItem('data', inputData);
 }

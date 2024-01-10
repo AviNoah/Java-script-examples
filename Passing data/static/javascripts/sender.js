@@ -6,6 +6,9 @@ function send(inputData, option) {
         case 2:
             localStorageMethod(inputData);
             break;
+        case 3:
+            sessionStorageMethod(inputData);
+            break;
     }
 }
 
@@ -19,4 +22,11 @@ function localStorageMethod(inputData) {
     // Data will stay stored in browser data regardless of server state
     localStorage.setItem('data', inputData)
     window.location.href = 'receiver.html'
+}
+
+function sessionStorageMethod(inputData) {
+    // Save into local storage under the key data
+    // Data will disappear the moment the session ends
+    sessionStorage.setItem('data', inputData);
+    window.location.href = 'receiver.html';
 }

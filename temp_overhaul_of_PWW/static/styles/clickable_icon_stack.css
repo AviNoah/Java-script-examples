@@ -1,0 +1,16 @@
+#clickable_icon_stack {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.clickable_icon {
+    width: 64px;
+    height: 64px;
+}
+
+.clickable_icon:hover {
+    transform: scale(1.2);
+    /*Enlarge a bit*/
+}

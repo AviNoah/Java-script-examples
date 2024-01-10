@@ -6,13 +6,14 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
     <title>Select a file</title>
+    <link rel="stylesheet" href="../static/styles/clickable_icon_stack.css" />
   </head>
   <body>
     <h1>Select a file</h1>
     <p>place holder</p>
-    <div id="clickable_icon_stack">
-        <img id="clickable_icon" src="../static/images/upload_icon.svg"></img>
-        <img id="clickable_icon" src="../static/images/save_icon.svg"></img>
+    <div class="clickable_icon_stack">
+      <img id="upload" class="clickable_icon" src="../static/images/upload_icon.svg" alt="Upload icon" />
+      <img id="save" class="clickable_icon" src="../static/images/save_icon.svg" alt="Save icon" />
     </div>
   </body>
 </html>

@@ -52,6 +52,8 @@ function cookieMethod(inputData) {
 // The backend server then handles the received data and processes it accordingly.
 
 function POSTMethod(inputData) {
+    // NOTE: this method doesn't redirect to receiver.html
+
     // This sends a POST request to the 'receiver.html' resource on the backend.
 
     // The fetch function returns a Promise object, allowing us to handle the result or failure.

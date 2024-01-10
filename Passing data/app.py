@@ -8,8 +8,13 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/receiver.html", methods=["POST"])
+@app.route("/receiver.html", methods=["POST", "GET"])
 def receive_data():
+    print(request.method)
+    if request.method == "GET":
+        # We dont want to return anything
+        return ""
+
     try:
         data = request.json
 

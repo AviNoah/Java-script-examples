@@ -33,8 +33,13 @@ function cookieMethod() {
     var cookies = document.cookie.split(';');
     var cookie_json_data = document.cookie;
     var decoded_json_data = decodeURIComponent(cookie_json_data);
-    var parsed_data = JSON.parse(decoded_json_data);
-
+    var parsed_data;
+    try {
+        parsed_data = JSON.parse(decoded_json_data)
+    }
+    catch (error) {
+        parsed_data = ""
+    }
     console.log(parsed_data);
     // Parse the JSON string back to an object
     return decoded_json_data;

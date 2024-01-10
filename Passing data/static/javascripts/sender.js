@@ -12,6 +12,9 @@ function send(inputData, option) {
         case 4:
             cookieMethod(inputData);
             break;
+        case 5:
+            POSTMethod(inputData);
+            break;
     }
 }
 

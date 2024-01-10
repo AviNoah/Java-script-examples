@@ -8,6 +8,8 @@ function receive(option) {
             return sessionStorageMethod();
         case 4:
             return cookieMethod();
+        case 5:
+            return POSTMethod();
     }
 }
 
@@ -43,4 +45,8 @@ function cookieMethod() {
     console.log(parsed_data);
     // Parse the JSON string back to an object
     return decoded_json_data;
+}
+
+function POSTMethod() {
+    return "Data was sent to backend server"
 }

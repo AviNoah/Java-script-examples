@@ -6,10 +6,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Passing Data Between Pages</title>
+    <script src="../javascripts/sender.js" /></script>
   </head>
+
   <body>
     <h1>Index Page</h1>
-
     <!-- A form to enter data -->
     <form id="dataForm">
       <label for="dataInput">Enter Data:</label>
@@ -18,15 +19,14 @@
     </form>
 
     <script>
-      // Event listener for the form submission
+      // Event listener for the form submission, do not allow an empty string
       document.getElementById('dataForm').addEventListener('submit', function (event) {
         event.preventDefault()
       
         // Get the entered data
         var inputData = document.getElementById('dataInput').value
-      
-        // Encode the data and navigate to the destination page
-        window.location.href = 'receiver.html?data=' + encodeURIComponent(inputData)
+        var option = 1
+        send(inputData, option)
       })
     </script>
   </body>

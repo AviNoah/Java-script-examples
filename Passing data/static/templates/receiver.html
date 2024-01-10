@@ -1,0 +1,25 @@
+<!-- receiver.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Receiver Page</title>
+    <!-- Import script -->
+    <script src="{{ url_for('static', filename = javascripts / reciever.js) }}"></script>
+  </head>
+  <body>
+    <h1>Data Receiver Page</h1>
+    <!-- Add paragraph containing passed value -->
+    <script>
+      // Get the received data using the function from receiver.js
+      var receivedData = getReceivedData()
+      
+      // Display the received data on the page
+      var displayElement = document.createElement('p')
+      displayElement.textContent = 'Received Data: ' + receivedData
+      document.body.appendChild(displayElement)
+    </script>
+  </body>
+</html>

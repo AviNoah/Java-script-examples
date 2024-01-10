@@ -1,0 +1,33 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passing Data Between Pages</title>
+  </head>
+  <body>
+    <h1>Index Page</h1>
+
+    <!-- A form to enter data -->
+    <form id="dataForm">
+      <label for="dataInput">Enter Data:</label>
+      <input type="text" id="dataInput" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      // Event listener for the form submission
+      document.getElementById('dataForm').addEventListener('submit', function (event) {
+        event.preventDefault()
+      
+        // Get the entered data
+        var inputData = document.getElementById('dataInput').value
+      
+        // Encode the data and navigate to the destination page
+        window.location.href = 'receiver.html?data=' + encodeURIComponent(inputData)
+      })
+    </script>
+  </body>
+</html>

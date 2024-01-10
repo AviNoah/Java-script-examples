@@ -44,8 +44,3 @@ function cookieMethod() {
     // Parse the JSON string back to an object
     return decoded_json_data;
 }
-
-function POSTMethod()
-{
-    
-}

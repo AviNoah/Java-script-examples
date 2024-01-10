@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'styles/iframe_grid_layout.css') }}" />
   </head>
   <body>
-    
-    <iframe src="spreadsheet_view.html"></iframe>
-    <iframe src="file_select_grid.html"></iframe>
+    <iframe src="{{ url_for('templates', filename = 'spreadsheet_view.html') }}"></iframe>
+    <iframe src="{{ url_for('templates', filename = 'file_select_grid.html') }}"></iframe>
   </body>
 </html>

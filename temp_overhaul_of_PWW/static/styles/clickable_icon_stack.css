@@ -1,3 +1,9 @@
+html,
+body {
+    display: block;
+    height: 100%;
+}
+
 #clickable_icon_stack {
     position: sticky;
     bottom: 0;
@@ -5,7 +11,18 @@
     z-index: 100;
 }
 
+.wrapper_sticks_to_bottom_right {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    /* Optional: Add some margin for spacing */
+    padding: 10px;
+    /* Optional: Add padding for content inside the div */
+}
+
 .clickable_icon {
+    display: block;
     width: 64px;
     height: 64px;
 }

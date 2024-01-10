@@ -17,4 +17,5 @@ function URLParametersMethod(inputData) {
 function localStorageMethod(inputData) {
     // Save into local storage under the key data
     localStorage.setItem('data', inputData)
+    window.location.href = 'receiver.html'
 }

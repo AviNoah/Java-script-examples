@@ -91,7 +91,7 @@ function updateSpreadsheetElement(sheet) {
     });
 }
 // Function to create a filter popup element
-function createFilterPopup() {
+async function createFilterPopup() {
     // Check if a filter popup already exists and remove it
     const existingPopup = document.querySelector('.filter-popup');
     if (existingPopup) {
@@ -101,10 +101,18 @@ function createFilterPopup() {
     // Create a filter popup element
     const filterPopup = document.createElement('div');
     filterPopup.className = 'filter-popup';
-    filterPopup.innerHTML = 'Filter options go here'; // Customize as needed
+
+    // Load content from external HTML file
+    const response = await fetch('filterPopup.html');
+    const content = await response.text();
+
+    // TODO: fix adding content from external HTML
+
+    filterPopup.innerHTML = content;
     document.body.appendChild(filterPopup);
     return filterPopup;
 }
+
 
 // Function to handle closing the filter popup
 function closeFilterPopup(event) {

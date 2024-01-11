@@ -90,8 +90,14 @@ function updateSpreadsheetElement(sheet) {
         filterImg.addEventListener('click', () => applyFilter(cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
     });
 }
-
+// Function to create a filter popup element
 function createFilterPopup() {
+    // Check if a filter popup already exists and remove it
+    const existingPopup = document.querySelector('.filter-popup');
+    if (existingPopup) {
+        existingPopup.parentNode.removeChild(existingPopup);
+    }
+
     // Create a filter popup element
     const filterPopup = document.createElement('div');
     filterPopup.className = 'filter-popup';
@@ -100,6 +106,7 @@ function createFilterPopup() {
     return filterPopup;
 }
 
+// Function to handle closing the filter popup
 function closeFilterPopup(event) {
     const filterPopup = document.querySelector('.filter-popup');
 
@@ -141,8 +148,11 @@ function applyFilter(columnIndex) {
     const filterPopup = createFilterPopup();
     const filterImg = document.querySelector('.filter');
     const rect = filterImg.getBoundingClientRect();
-    filterPopup.style.left = rect.left + 'px';
-    filterPopup.style.top = rect.bottom + 'px';
+
+    // Set the position of the filter popup relative to the clicked filter image
+    filterPopup.style.position = 'absolute';
+    filterPopup.style.left = `${rect.left + window.scrollX}px`; // Include horizontal scroll
+    filterPopup.style.top = `${rect.bottom + window.scrollY}px`; // Include vertical scroll
     filterPopup.style.display = 'block';
 
     // Close the popup when clicking outside of it

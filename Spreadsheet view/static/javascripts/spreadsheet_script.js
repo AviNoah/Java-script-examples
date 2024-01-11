@@ -87,7 +87,7 @@ function updateSpreadsheetElement(sheet) {
         filterImg.style.marginLeft = '5px'; // Adjust the left margin as needed
 
         // Apply filter when the filter image is clicked
-        filterImg.addEventListener('click', () => applyFilter(cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
+        filterImg.addEventListener('click', (event) => applyFilter(event, cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
     });
 }
 // Function to create a filter popup element
@@ -109,20 +109,22 @@ function createFilterPopup() {
 // Function to handle closing the filter popup
 function closeFilterPopup(event) {
     const filterPopup = document.querySelector('.filter-popup');
-    const filterIcon = document.querySelector('.filter');
 
-    console.log(event.target !== filterIcon)
-    console.log(event.target !== filterPopup)
-    console.log(!filterPopup.contains(event.target))
-    console.log(!event.target.classList.contains('filter'))
+    // Check if the clicked element or its parent is outside the filter popup
+    if (
+        (event.target.classList.contains('selected') || event.target.parentElement.classList.contains('selected')) &&
+        !filterPopup.contains(event.target)
+    ) {
+        // Filter icon was selected again, don't close popup
+        return;
+    }
 
-
-    // Check if the clicked element is outside the filter popup
-    if (event.target !== filterIcon && event.target !== filterPopup && !event.target.classList.contains('filter') && !filterPopup.contains(event.target)) {
+    if (event.target !== filterPopup && !filterPopup.contains(event.target)) {
         filterPopup.style.display = 'none';
         document.removeEventListener('click', closeFilterPopup);
     }
 }
+
 
 // Function to handle changes in the selected sheet spinner
 function changeSheet() {
@@ -147,14 +149,25 @@ function changeSheet() {
 }
 
 // Function to apply a filter (customize as needed)
-function applyFilter(columnIndex) {
+function applyFilter(event, columnIndex) {
     // Apply filter to workbook
     console.log(`Applying filter to column ${columnIndex}`);
 
     // Show the filter popup below the clicked filter image
     const filterPopup = createFilterPopup();
-    const filterImg = document.querySelector('.filter');
-    const rect = filterImg.getBoundingClientRect();
+
+    // Get all filter images
+    const filterImages = document.querySelectorAll('.filter');
+
+    // Remove 'selected' class from all filter images
+    filterImages.forEach(img => img.classList.remove('selected'));
+
+    // Get the clicked filter image and add 'selected' class
+    const clickedFilterImg = event.target;
+    clickedFilterImg.classList.add('selected');
+
+    // Get the position of the clicked filter image
+    const rect = clickedFilterImg.getBoundingClientRect();
 
     // Set the position of the filter popup relative to the clicked filter image
     filterPopup.style.position = 'absolute';

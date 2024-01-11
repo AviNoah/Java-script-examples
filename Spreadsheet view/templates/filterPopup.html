@@ -1,5 +1,16 @@
 <!-- filterPopup.html -->
-<div class="filter-popup-content">
-  <h2>Filter Options</h2>
-  <!-- Add your filter options and content here -->
+<div>
+  <h2>Filter</h2>
+  <div class="filter-popup-content">
+    <select name="Filter selector" id="filter_selector">
+      <option value="exact">Exact match</option>
+      <option value="contains">Contains</option>
+      <option value="not contains">Does not contain</option>
+      <option value="regex">RegEx</option>
+    </select>
+    <!-- Input field for filter -->
+    <input type="text" required id="filter_input" />
+    <!-- Button for submitting the filter -->
+    <button id="filter_submit_button">Submit</button>
+  </div>
 </div>

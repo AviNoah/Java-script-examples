@@ -46,3 +46,8 @@ body {
     padding: 10px;
     display: none;
 }
+
+.filter-popup-content {
+    display: flex;
+    flex-direction: column;
+}

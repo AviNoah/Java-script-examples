@@ -90,6 +90,7 @@ function updateSpreadsheetElement(sheet) {
         filterImg.addEventListener('click', (event) => applyFilter(event, cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
     });
 }
+
 // Function to create a filter popup element
 async function createFilterPopup() {
     // Check if a filter popup already exists and remove it
@@ -104,13 +105,22 @@ async function createFilterPopup() {
 
     // Load content from external HTML file
     const response = await fetch('filterPopup.html');
-    const content = await response.text();
+    if (!response.ok) {
+        console.error("Failed to fetch filterPopup html file");
+        return null;
+    }
 
-    // TODO: fix adding content from external HTML
+    try {
+        let content = await response.text();
+        // TODO: fix adding content from external HTML
 
-    filterPopup.innerHTML = content;
-    document.body.appendChild(filterPopup);
-    return filterPopup;
+        filterPopup.innerHTML = content;
+        document.body.appendChild(filterPopup);
+        return filterPopup;
+    }
+    catch (error) {
+        console.error(error)
+    }
 }
 
 

@@ -129,6 +129,9 @@ function closeFilterPopup(event) {
     const filterPopup = document.querySelector('.filter-popup');
 
     // Check if the clicked element or its parent is outside the filter popup
+    if (!filterPopup)
+        return;  // Not initialized yet
+
     if (
         (event.target.classList.contains('selected') || event.target.parentElement.classList.contains('selected')) &&
         !filterPopup.contains(event.target)

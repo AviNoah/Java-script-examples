@@ -1,9 +1,6 @@
 // Make the fileInput button element run handleFile() every time it changes
 document.getElementById('fileInput').addEventListener('change', handleFile);
 
-// Make the filter submit button run process_input every time it is clicked
-document.getElementById('filter_submit_button').addEventListener('click', process_input)
-
 // Get reference to the selected sheet spinner element
 const selectedSheetSpinner = document.getElementById('selectedSheet');
 selectedSheetSpinner.addEventListener('change', changeSheet);
@@ -20,7 +17,7 @@ function process_input() {
     const filterInputValue = document.getElementById('filter_input').value;
 
     // TODO: process input
-    console.log(`Filter using '${selectedFilterType}' on the expression '${filterInputValue}'`)
+    console.log(`Filter using '${selectedFilterType}' on the expression '${filterInputValue}'`);
 
 }
 
@@ -132,6 +129,9 @@ async function createFilterPopup() {
 
         filterPopup.innerHTML = content;
         document.body.appendChild(filterPopup);
+
+        // Make the filter submit button run process_input every time it is clicked
+        document.getElementById('filter_submit_button').addEventListener('click', process_input);
         return filterPopup;
     }
     catch (error) {

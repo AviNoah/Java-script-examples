@@ -31,3 +31,8 @@ body {
 #spreadsheet th {
     background-color: #f2f2f2;
 }
+
+.filter {
+    height: 24px;
+    width: 24px;
+}

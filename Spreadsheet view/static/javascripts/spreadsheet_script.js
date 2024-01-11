@@ -109,9 +109,16 @@ function createFilterPopup() {
 // Function to handle closing the filter popup
 function closeFilterPopup(event) {
     const filterPopup = document.querySelector('.filter-popup');
+    const filterIcon = document.querySelector('.filter');
+
+    console.log(event.target !== filterIcon)
+    console.log(event.target !== filterPopup)
+    console.log(!filterPopup.contains(event.target))
+    console.log(!event.target.classList.contains('filter'))
+
 
     // Check if the clicked element is outside the filter popup
-    if (event.target !== filterPopup && !filterPopup.contains(event.target)) {
+    if (event.target !== filterIcon && event.target !== filterPopup && !event.target.classList.contains('filter') && !filterPopup.contains(event.target)) {
         filterPopup.style.display = 'none';
         document.removeEventListener('click', closeFilterPopup);
     }

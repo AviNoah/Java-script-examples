@@ -167,12 +167,12 @@ function changeSheet() {
 }
 
 // Function to apply a filter (customize as needed)
-function applyFilter(event, columnIndex) {
+async function applyFilter(event, columnIndex) {
     // Apply filter to workbook
     console.log(`Applying filter to column ${columnIndex}`);
 
     // Show the filter popup below the clicked filter image
-    const filterPopup = createFilterPopup();
+    const filterPopup = await createFilterPopup();
 
     // Get all filter images
     const filterImages = document.querySelectorAll('.filter');

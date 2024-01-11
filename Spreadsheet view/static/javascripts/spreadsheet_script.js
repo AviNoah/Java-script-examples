@@ -40,6 +40,15 @@ function handleFile(event) {
     }
 }
 
+
+// Function to adjust the selected sheet spinner properties
+function adjustSpinner(sheetCount) {
+    // Set the value to 1 and change the maximum value to sheet count
+    selectedSheetSpinner.value = 1;
+    selectedSheetSpinner.max = sheetCount;
+}
+
+
 // Function to update the spreadsheet element with grid lines and filter buttons
 function updateSpreadsheetElement(sheet) {
     // Convert sheet data to HTML with grid lines
@@ -82,6 +91,24 @@ function updateSpreadsheetElement(sheet) {
     });
 }
 
+function createFilterPopup() {
+    // Create a filter popup element
+    const filterPopup = document.createElement('div');
+    filterPopup.className = 'filter-popup';
+    filterPopup.innerHTML = 'Filter options go here'; // Customize as needed
+    document.body.appendChild(filterPopup);
+    return filterPopup;
+}
+
+function closeFilterPopup(event) {
+    const filterPopup = document.querySelector('.filter-popup');
+
+    // Check if the clicked element is outside the filter popup
+    if (event.target !== filterPopup && !filterPopup.contains(event.target)) {
+        filterPopup.style.display = 'none';
+        document.removeEventListener('click', closeFilterPopup);
+    }
+}
 
 // Function to handle changes in the selected sheet spinner
 function changeSheet() {
@@ -105,16 +132,19 @@ function changeSheet() {
     }
 }
 
-// Function to adjust the selected sheet spinner properties
-function adjustSpinner(sheetCount) {
-    // Set the value to 1 and change the maximum value to sheet count
-    selectedSheetSpinner.value = 1;
-    selectedSheetSpinner.max = sheetCount;
-}
-
 // Function to apply a filter (customize as needed)
 function applyFilter(columnIndex) {
     // Apply filter to workbook
     console.log(`Applying filter to column ${columnIndex}`);
 
+    // Show the filter popup below the clicked filter image
+    const filterPopup = createFilterPopup();
+    const filterImg = document.querySelector('.filter');
+    const rect = filterImg.getBoundingClientRect();
+    filterPopup.style.left = rect.left + 'px';
+    filterPopup.style.top = rect.bottom + 'px';
+    filterPopup.style.display = 'block';
+
+    // Close the popup when clicking outside of it
+    document.addEventListener('click', closeFilterPopup);
 }

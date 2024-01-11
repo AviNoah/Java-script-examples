@@ -36,3 +36,13 @@ body {
     height: 24px;
     width: 24px;
 }
+
+/* For the pop up box when filter is selected */
+.filter-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+}

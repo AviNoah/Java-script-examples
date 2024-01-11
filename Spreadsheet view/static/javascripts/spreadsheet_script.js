@@ -28,8 +28,10 @@ function handleFile(event) {
 
             // Display the HTML in the spreadsheet div
             document.getElementById('spreadsheet').innerHTML = html;
-        };
 
+            // Adjust the spinner based on the number of sheets
+            adjustSpinner(workbook.SheetNames.length);
+        };
         reader.readAsBinaryString(file);
     }
 }

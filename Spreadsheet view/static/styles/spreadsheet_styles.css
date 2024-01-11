@@ -5,5 +5,11 @@ body {
 
 body {
     display: flex;
+    flex-direction: column;
+}
+
+.sheetOptions {
+    display: flex;
     flex-direction: row;
+    justify-content: left;
 }

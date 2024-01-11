@@ -5,6 +5,9 @@ document.getElementById('fileInput').addEventListener('change', handleFile);
 const selectedSheetSpinner = document.getElementById('selectedSheet');
 selectedSheetSpinner.addEventListener('change', changeSheet);
 
+// Get reference to spreadsheet element div
+const spreadsheetElement = document.getElementById('spreadsheet');
+
 // Function to handle file input changes
 function handleFile(event) {
     const file = event.target.files[0];
@@ -13,27 +16,37 @@ function handleFile(event) {
         const reader = new FileReader();
 
         reader.onload = function (event) {
-            const data = event.target.result;
-            const workbook = XLSX.read(data, { type: 'binary' });
+            try {
+                const data = event.target.result;
+                const workbook = XLSX.read(data, { type: 'binary' });
 
-            // Save the selected workbook in sessionStorage
-            sessionStorage.setItem("selected_workbook", JSON.stringify(workbook));
+                // Save the selected workbook in sessionStorage
+                sessionStorage.setItem("selected_workbook", JSON.stringify(workbook));
 
-            // Always start on the first page
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
+                // Always start on the first page
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
 
-            // Convert sheet data to HTML
-            const html = XLSX.utils.sheet_to_html(sheet);
+                updateSpreadsheetElement(sheet);
 
-            // Display the HTML in the spreadsheet div
-            document.getElementById('spreadsheet').innerHTML = html;
-
-            // Adjust the spinner based on the number of sheets
-            adjustSpinner(workbook.SheetNames.length);
+                // Adjust the spinner based on the number of sheets
+                adjustSpinner(workbook.SheetNames.length);
+            } catch (error) {
+                console.error("Error reading the Excel file:", error);
+            }
         };
+
         reader.readAsBinaryString(file);
     }
+}
+
+// Function to update the spreadsheet element with grid lines
+function updateSpreadsheetElement(sheet) {
+    // Convert sheet data to HTML with grid lines
+    const html = XLSX.utils.sheet_to_html(sheet, { editable: false, showGridLines: true });
+
+    // Display the HTML in the spreadsheet div
+    spreadsheetElement.innerHTML = html;
 }
 
 // Function to handle changes in the selected sheet spinner
@@ -41,19 +54,20 @@ function changeSheet() {
     const selectedWorkbookStr = sessionStorage.getItem("selected_workbook");
 
     if (selectedWorkbookStr) {
-        const selectedWorkbook = JSON.parse(selectedWorkbookStr);
+        try {
+            const selectedWorkbook = JSON.parse(selectedWorkbookStr);
 
-        // Adjust for 0-based index
-        const sheetIndex = selectedSheetSpinner.value - 1;
+            // Adjust for 0-based index
+            const sheetIndex = selectedSheetSpinner.value - 1;
 
-        const sheetName = selectedWorkbook.SheetNames[sheetIndex];
-        const sheet = selectedWorkbook.Sheets[sheetName];
+            const sheetName = selectedWorkbook.SheetNames[sheetIndex];
+            const sheet = selectedWorkbook.Sheets[sheetName];
 
-        // Convert sheet data to HTML
-        const html = XLSX.utils.sheet_to_html(sheet);
-
-        // Display the HTML in the spreadsheet div
-        document.getElementById('spreadsheet').innerHTML = html;
+            // Update the spreadsheet element
+            updateSpreadsheetElement(sheet);
+        } catch (error) {
+            console.error("Error parsing selected workbook:", error);
+        }
     }
 }
 

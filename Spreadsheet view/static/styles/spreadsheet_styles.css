@@ -8,8 +8,26 @@ body {
     flex-direction: column;
 }
 
-.sheetOptions {
+#sheetOptions {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: flex-start;
+}
+
+/* Add this to your existing CSS file or stylesheet */
+
+#spreadsheet table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#spreadsheet th,
+#spreadsheet td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+#spreadsheet th {
+    background-color: #f2f2f2;
 }

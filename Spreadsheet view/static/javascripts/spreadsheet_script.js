@@ -1,12 +1,28 @@
 // Make the fileInput button element run handleFile() every time it changes
 document.getElementById('fileInput').addEventListener('change', handleFile);
 
+// Make the filter submit button run process_input every time it is clicked
+document.getElementById('filter_submit_button').addEventListener('click', process_input)
+
 // Get reference to the selected sheet spinner element
 const selectedSheetSpinner = document.getElementById('selectedSheet');
 selectedSheetSpinner.addEventListener('change', changeSheet);
 
 // Get reference to spreadsheet element div
 const spreadsheetElement = document.getElementById('spreadsheet');
+
+
+function process_input() {
+    // Get the selected filter type
+    const selectedFilterType = document.getElementById('filter_selector').value;
+
+    // Get the filter input value
+    const filterInputValue = document.getElementById('filter_input').value;
+
+    // TODO: process input
+    console.log(`Filter using '${selectedFilterType}' on the expression '${filterInputValue}'`)
+
+}
 
 // Function to handle file input changes
 function handleFile(event) {

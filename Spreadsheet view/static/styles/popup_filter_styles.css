@@ -4,19 +4,19 @@
 }
 
 
-input {
+.filter-popup-content input {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 4px;
 }
 
 
-input:focus {
+.filter-popup-content input:focus {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 
-select {
+.filter-popup-content select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;

@@ -6,18 +6,27 @@ document.getElementById("filter_submit_button").addEventListener("click", submit
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
+// Add a loading class to the body while waiting for the response
+function setLoadingState(loading) {
+    document.body.classList.toggle('loading', loading);
+}
 
 function submit_filter() {
+    setLoadingState(true);
+
     let pattern_input = filter_input_element.value;
     let selection = filter_selector_element.value;
 
-    if (pattern_input === "")
+    if (pattern_input === "") {
+        setLoadingState(false);
         return;  // Don't run if nothing entered
+    }
 
-    pattern_input = escapeRegExp(pattern_input)
+    pattern_input = escapeRegExp(pattern_input);
 
     const data = { 'selection': selection, 'pattern': pattern_input }
-    const url = "" // fill later
+    const url = ""; // fill later
+
     fetch(url, {
         method: "POST",
         headers: {
@@ -26,6 +35,8 @@ function submit_filter() {
         body: JSON.stringify(data)
     })
         .then(response => {
+            setLoadingState(false);
+
             // Handle the response, e.g., check if it's successful
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -37,6 +48,8 @@ function submit_filter() {
             console.log(responseData);
         })
         .catch(error => {
+            setLoadingState(false);
+
             // Handle errors
             console.error("Error:", error);
         });

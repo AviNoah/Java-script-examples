@@ -1,6 +1,6 @@
 :root {
-    --normal_button: #7a3cfd;
-    --dangerous_button: red;
+    --normal_button: #7a3cff;
+    --dangerous_button: rgb(233, 71, 71);
 }
 
 .filter-popup-content button {

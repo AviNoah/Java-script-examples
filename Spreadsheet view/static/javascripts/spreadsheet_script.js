@@ -73,6 +73,9 @@ function updateSpreadsheetElement(sheet) {
     // Add filter logo images to all cells in the first row
     const firstRowCells = spreadsheetElement.querySelectorAll('tr:first-child td');
     firstRowCells.forEach(cell => {
+        // Add filter-cell class to header cells
+        cell.classList.add('filter-cell');
+
         const filterImg = document.createElement('img');
         filterImg.src = '../static/images/filter_logo.svg';
         filterImg.classList.add("filter");

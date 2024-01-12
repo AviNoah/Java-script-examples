@@ -8,7 +8,7 @@ function escapeRegExp(string) {
 }
 
 function submit_filter() {
-    let pattern_input = filter_input_element.textContent;
+    let pattern_input = filter_input_element.value;
     let selection = filter_selector_element.value;
 
     if (pattern_input === "")

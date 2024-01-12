@@ -34,7 +34,7 @@ function process_filter() {
     const escapedPatternInput = escapeRegExp(patternInput);
 
     const data = { 'selection': selection, 'pattern': escapedPatternInput }
-    const url = ""; // fill later
+    const url = ""; // Point to the end-point server
 
     fetch(url, {
         method: "POST",

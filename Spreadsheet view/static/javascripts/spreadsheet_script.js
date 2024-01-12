@@ -8,17 +8,60 @@ selectedSheetSpinner.addEventListener('change', changeSheet);
 // Get reference to spreadsheet element div
 const spreadsheetElement = document.getElementById('spreadsheet');
 
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+// Add a loading class to the body while waiting for the response
+function setLoadingState(loading) {
+    document.body.classList.toggle('loading', loading);
+}
 
-function process_input() {
+function process_filter() {
+    setLoadingState(true);
     // Get the selected filter type
-    const selectedFilterType = document.getElementById('filter_selector').value;
+    const selection = document.getElementById('filter_selector').value;
 
     // Get the filter input value
-    const filterInputValue = document.getElementById('filter_input').value;
+    const patternInput = document.getElementById('filter_input').value;
 
-    // TODO: process input
-    console.log(`Filter using '${selectedFilterType}' on the expression '${filterInputValue}'`);
+    console.log(`Pattern input is: ${escapedPatternInput} for selection ${selection}`)
 
+    if (escapedPatternInput === "") {
+        setLoadingState(false);
+        return;  // Don't run if nothing entered
+    }
+
+    escapedPatternInput = escapeRegExp(patternInput);
+
+    const data = { 'selection': selection, 'pattern': escapedPatternInput }
+    const url = ""; // fill later
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            setLoadingState(false);
+
+            // Handle the response, e.g., check if it's successful
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(responseData => {
+            // Process the response data
+            console.log(responseData);
+        })
+        .catch(error => {
+            setLoadingState(false);
+
+            // Handle errors
+            console.error("Error:", error);
+        });
 }
 
 // Function to handle file input changes
@@ -134,7 +177,7 @@ async function createFilterPopup() {
         document.body.appendChild(filterPopup);
 
         // Make the filter submit button run process_input every time it is clicked
-        document.getElementById('filter_submit_button').addEventListener('click', process_input);
+        document.getElementById('filter_submit_button').addEventListener('click', process_filter);
         return filterPopup;
     }
     catch (error) {

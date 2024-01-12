@@ -21,8 +21,6 @@ body {
     justify-content: flex-start;
 }
 
-/* Add this to your existing CSS file or stylesheet */
-
 #spreadsheet table {
     border-collapse: collapse;
     width: 100%;

@@ -1,4 +1,20 @@
+:root {
+    --normal_button: #7a3cfd;
+    --dangerous_button: red;
+}
+
 .filter-popup-content button {
     /* Specific styling for buttons inside the filter popup */
     border-radius: 10px;
+    margin-top: 3px;
+    color: white;
+}
+
+#filter_submit_button {
+    background-color: var(--normal_button);
+}
+
+
+.dangerous {
+    background-color: var(--dangerous_button);
 }

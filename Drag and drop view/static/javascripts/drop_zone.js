@@ -1,28 +1,25 @@
+// Wait for DOC content to load
+document.addEventListener('DOMContentLoaded', function () {
+    const dropzone = document.querySelector('.dropzone');
 
-const dropzone = document.getElementById('dropzone_main_page')
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+    });
 
-// Listen to file dragging
-dropzone.addEventListener('dragover', (e) => {
-    e.preventDefault()
-    dropzone.classList.add('hover')
-})
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+    });
 
-// Listen to drag stop
-dropzone.addEventListener('dragleave', () => {
-    dropzone.classList.remove('hover')
-})
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        handle_dropped_files(e);
+    });
 
-
-// Listen to file drop
-dropzone.addEventListener('drop', (e) => {
-    e.preventDefault()
-    dropzone.classList.remove('hover')
-    handle_dropped_files(e)
-})
-
-function handle_dropped_files(event) {
-
-    const files = event.dataTransfer.files
-    // Handle the dropped files as needed
-    console.log(files)
-}
+    function handle_dropped_files(event) {
+        const files = event.dataTransfer.files;
+        // Handle the dropped files as needed
+        console.log(files);
+    }
+});

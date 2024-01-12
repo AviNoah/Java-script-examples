@@ -31,7 +31,7 @@ function process_filter() {
         return;  // Don't run if nothing entered
     }
 
-    escapedPatternInput = escapeRegExp(patternInput);
+    const escapedPatternInput = escapeRegExp(patternInput);
 
     const data = { 'selection': selection, 'pattern': escapedPatternInput }
     const url = ""; // fill later

@@ -16,7 +16,7 @@ function setLoadingState(loading) {
     document.body.classList.toggle('loading', loading);
 }
 
-function process_filter() {
+function process_filter(columnIndex) {
     setLoadingState(true);
     // Get the selected filter type
     const selection = document.getElementById('filter_selector').value;
@@ -24,7 +24,7 @@ function process_filter() {
     // Get the filter input value
     const patternInput = document.getElementById('filter_input').value;
 
-    console.log(`Pattern input is: ${patternInput} for selection ${selection}`)
+    console.log(`Pattern input is: ${patternInput} for selection ${selection} on column ${columnIndex}`)
 
     if (patternInput === "") {
         setLoadingState(false);
@@ -151,7 +151,7 @@ function updateSpreadsheetElement(sheet) {
 }
 
 // Function to create a filter popup element
-async function createFilterPopup() {
+async function createFilterPopup(columnIndex) {
     // Check if a filter popup already exists and remove it
     const existingPopup = document.querySelector('.filter-popup');
     if (existingPopup) {
@@ -171,13 +171,12 @@ async function createFilterPopup() {
 
     try {
         let content = await response.text();
-        // TODO: fix adding content from external HTML
 
         filterPopup.innerHTML = content;
         document.body.appendChild(filterPopup);
 
         // Make the filter submit button run process_input every time it is clicked
-        document.getElementById('filter_submit_button').addEventListener('click', process_filter);
+        document.getElementById('filter_submit_button').addEventListener('click', () => process_filter(columnIndex));
         return filterPopup;
     }
     catch (error) {
@@ -237,7 +236,7 @@ async function applyFilter(event, columnIndex) {
     console.log(`Applying filter to column ${columnIndex}`);
 
     // Show the filter popup below the clicked filter image
-    const filterPopup = await createFilterPopup();
+    const filterPopup = await createFilterPopup(columnIndex);
 
     // Get all filter images
     const filterImages = document.querySelectorAll('.filter');

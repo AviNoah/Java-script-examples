@@ -3,6 +3,19 @@
     --dangerous_button: rgb(233, 71, 71);
 }
 
+input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
 .filter-popup-content button {
     /* Specific styling for buttons inside the filter popup */
     border-radius: 10px;

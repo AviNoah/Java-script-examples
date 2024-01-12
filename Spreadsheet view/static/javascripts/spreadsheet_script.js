@@ -24,7 +24,7 @@ function process_filter() {
     // Get the filter input value
     const patternInput = document.getElementById('filter_input').value;
 
-    console.log(`Pattern input is: ${escapedPatternInput} for selection ${selection}`)
+    console.log(`Pattern input is: ${patternInput} for selection ${selection}`)
 
     if (escapedPatternInput === "") {
         setLoadingState(false);

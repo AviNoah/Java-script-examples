@@ -26,7 +26,7 @@ function process_filter() {
 
     console.log(`Pattern input is: ${patternInput} for selection ${selection}`)
 
-    if (escapedPatternInput === "") {
+    if (patternInput === "") {
         setLoadingState(false);
         return;  // Don't run if nothing entered
     }

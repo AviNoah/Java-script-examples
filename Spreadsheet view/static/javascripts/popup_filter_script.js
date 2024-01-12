@@ -17,6 +17,8 @@ function submit_filter() {
     let pattern_input = filter_input_element.value;
     let selection = filter_selector_element.value;
 
+    console.log(`Pattern input is: ${pattern_input} for selection ${selection}`)
+
     if (pattern_input === "") {
         setLoadingState(false);
         return;  // Don't run if nothing entered

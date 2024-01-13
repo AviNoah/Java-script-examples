@@ -3,30 +3,32 @@
 document.addEventListener("DOMContentLoaded", function () {
     let fileTrees = document.getElementsByClassName("file_tree");
     Array.from(fileTrees).forEach(fileTree => {
-        addPlaceholder(fileTree, "Enter text")
-        fileTree.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree) });
+        addPlaceholder(fileTree, "Enter text");
+        fileTree.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree); });
     });
 });
 
 function addPlaceholder(fileTree, placeHolderText) {
     const items = fileTree.getElementsByTagName("li");
-    if (length(items) !== 0)
-        return;  // Do not add placeholder if not empty
+    if (items.length !== 0) {
+        return;  // Do not add a placeholder if not empty
+    }
 
-    addItem(fileTree, placeHolderText)
+    addItem(fileTree, placeHolderText);
 }
 
-function makeItem(text) {
+function makeItem(fileTree, text) {
     // Make a new item, return a wrapper div with all buttons associated with the entry
     let wrapperDiv = document.createElement("div");
-    wrapperDiv.classList.add("li_wrapper")
+    wrapperDiv.classList.add("li_wrapper");
 
     let newItem = document.createElement("li");
     newItem.setAttribute("contenteditable", "true");
-    if (placeHolderText !== null)
-        newItem.setAttribute("textContent", text);
+    if (text !== null) {
+        newItem.textContent = text;
+    }
 
-    newItem.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree) });
+    newItem.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree); });
 
     // Create a delete button with an image
     let deleteButton = document.createElement("img");
@@ -38,7 +40,7 @@ function makeItem(text) {
     wrapperDiv.appendChild(deleteButton);
     wrapperDiv.appendChild(newItem);
 
-    return wrapperDiv
+    return wrapperDiv;
 }
 
 function checkIfLastItemWasUsed(fileTree) {
@@ -47,12 +49,12 @@ function checkIfLastItemWasUsed(fileTree) {
 
     // Check if lastItem was entered text; if so, add a new item under it
     if (lastItem.textContent.trim() !== "") {
-        addItem(fileTree)  // Add a new item after it
+        addItem(fileTree);  // Add a new item after it
     }
 }
 
 function addItem(fileTree, text) {
-    const newItem = makeItem(text);
+    const newItem = makeItem(fileTree, text);
     fileTree.appendChild(newItem);
     newItem.focus();
 }
@@ -60,6 +62,6 @@ function addItem(fileTree, text) {
 function deleteItem(fileTree, item) {
     if (fileTree.contains(item)) {
         fileTree.removeChild(item);
-        console.log(`Removed child from file list with value ${item.textContent}`);
+        console.log(`Removed child from file list with value ${item.lastChild.textContent}`);
     }
 }

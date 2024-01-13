@@ -34,13 +34,35 @@ function makeItem(fileTree, text) {
     let deleteButton = document.createElement("img");
     deleteButton.setAttribute("src", "../static/images/Delete.svg");
     deleteButton.setAttribute("alt", "Delete");
+    deleteButton.classList.add("item-button");
     deleteButton.classList.add("delete-button");
     deleteButton.addEventListener("click", () => deleteItem(fileTree, wrapperDiv));
 
+    // Create a full history button with an image
+    let fullHistoryButton = document.createElement("img");
+    fullHistoryButton.setAttribute("src", "../static/images/FullHistory.svg");
+    fullHistoryButton.setAttribute("alt", "Full history");
+    fullHistoryButton.classList.add("item-button");
+    fullHistoryButton.classList.add("full-history-button");
+    fullHistoryButton.addEventListener("click", () => showFullHistoryForItem(wrapperDiv));
+
     wrapperDiv.appendChild(deleteButton);
+    wrapperDiv.appendChild(fullHistoryButton);
     wrapperDiv.appendChild(newItem);
 
+    wrapperDiv.addEventListener("click", () => displaySelection(wrapperDiv))
     return wrapperDiv;
+}
+
+function displaySelection(itemWrapper) {
+    console.log(`Selected wrapper ${itemWrapper}`)
+}
+
+function showFullHistoryForItem(itemWrapper) {
+    // Add a child list underneath the itemWrapper of type ol, show previous versions
+    // attach a listener to see if user clicks anywhere outside this list, if so close it.
+    // if user selects an item from this list display it in itemWrapper
+    return;
 }
 
 function checkIfLastItemWasUsed(fileTree) {

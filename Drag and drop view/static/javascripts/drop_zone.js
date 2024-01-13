@@ -1,30 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Add dragover event listener to the entire document
+    const dropzone = document.querySelector('.dropzone');
+
+    dropzone.addEventListener('dragenter', function () {
+        handleDragEnter();
+    });
+
+    dropzone.addEventListener('dragleave', function () {
+        handleDragLeave();
+    });
+
     document.addEventListener('dragover', function (e) {
         e.preventDefault();
-        handleDragOver();
     });
 
-    // Add dragleave event listener to the entire document
-    document.addEventListener('dragleave', function () {
-        handleDragLeave();
-    });
-
-    // Add drop event listener to the entire document
-    document.addEventListener('drop', function (e) {
+    dropzone.addEventListener('drop', function (e) {
         e.preventDefault();
         handleDragLeave();
-        handle_dropped_files(e);
+
+        // Check if the drop occurred on the drop zone or its children
+        if (isEventOnDropzone(e)) {
+            handle_dropped_files(e);
+        }
     });
 
-    function handleDragOver() {
-        const dropzone = document.querySelector('.dropzone');
+    function handleDragEnter() {
         dropzone.classList.add('dragover');
     }
 
     function handleDragLeave() {
-        const dropzone = document.querySelector('.dropzone');
         dropzone.classList.remove('dragover');
+    }
+
+    function isEventOnDropzone(event) {
+        return dropzone.contains(event.target);
     }
 
     function handle_dropped_files(event) {

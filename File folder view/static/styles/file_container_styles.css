@@ -1,0 +1,26 @@
+:root {
+    --items_in_row: 4;
+    --grid_row_gap: 10px;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+.files-container {
+    width: 80%;
+    height: 80%;
+}
+
+.files-folder {
+    display: grid;
+    grid-template-columns: repeat(var(--items_in_row), 1fr);
+    grid-gap: var(--grid_row_gap);
+}
+
+/* The following code ensures that every nth item starts a new row */
+.files-folder>*:nth-child(var(--items_in_row)n) {
+    grid-column: 1 / span var(--items_in_row);
+}

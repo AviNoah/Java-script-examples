@@ -44,14 +44,16 @@ function makeItem(fileTree, text) {
 }
 
 function checkIfLastItemWasUsed(fileTree) {
-    const items = fileTree.getElementsByTagName("li");
+    const items = fileTree.getElementsByTagName("li_wrapper");
     let lastItem = items[items.length - 1];
+    let liOfLastItem = lastItem.getElementsByTagName("item_text")[0]  // There is only one
 
     // Check if lastItem was entered text; if so, add a new item under it
-    if (lastItem.textContent.trim() !== "") {
+    if (liOfLastItem.textContent.trim() !== "") {
         addItem(fileTree);  // Add a new item after it
     }
 }
+
 
 function addItem(fileTree, text) {
     const newItem = makeItem(fileTree, text);
@@ -60,6 +62,16 @@ function addItem(fileTree, text) {
 }
 
 function deleteItem(fileTree, item) {
+    const items = fileTree.getElementsByTagName("li_wrapper");
+
+    if (items.length === 1) {
+        let lastItem = items[0]
+        let liOfLastItem = lastItem.getElementsByTagName("item_text")[0]  // There is only one
+
+        liOfLastItem.textContent = "";  // Delete text content instead of deleting element
+        return;
+    }
+
     if (fileTree.contains(item)) {
         fileTree.removeChild(item);
         console.log(`Removed child from file list with value ${item.lastChild.textContent}`);

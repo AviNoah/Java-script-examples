@@ -27,7 +27,7 @@ function makeItem(fileTree, text) {
     if (text !== null) {
         newItem.textContent = text;
     }
-
+    newItem.classList.add("item_text");
     newItem.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree); });
 
     // Create a delete button with an image

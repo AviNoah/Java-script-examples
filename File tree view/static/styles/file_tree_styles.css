@@ -17,7 +17,6 @@ body {
 .file_tree li {
     display: flex;
     flex-direction: row;
-    
 }
 
 .delete-button {

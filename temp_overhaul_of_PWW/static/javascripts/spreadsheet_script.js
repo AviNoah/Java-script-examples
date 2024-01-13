@@ -163,7 +163,7 @@ async function createFilterPopup(columnIndex) {
     filterPopup.className = 'filter-popup';
 
     // Load content from external HTML file
-    const response = await fetch('filterPopup.html');
+    const response = await fetch('filter_popup');
     if (!response.ok) {
         console.error("Failed to fetch filterPopup html file");
         return null;

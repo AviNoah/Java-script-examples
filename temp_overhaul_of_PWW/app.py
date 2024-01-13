@@ -18,5 +18,10 @@ def show_spreadsheet():
     return render_template("spreadsheet_view.html")
 
 
+@app.route("/filter_popup")
+def show_filter_popup():
+    return render_template("filterPopup.html")
+
+
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

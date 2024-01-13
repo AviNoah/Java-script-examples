@@ -44,9 +44,9 @@ function makeItem(fileTree, text) {
 }
 
 function checkIfLastItemWasUsed(fileTree) {
-    const items = fileTree.getElementsByTagName("li_wrapper");
+    const items = fileTree.getElementsByClassName("li_wrapper");
     let lastItem = items[items.length - 1];
-    let liOfLastItem = lastItem.getElementsByTagName("item_text")[0]  // There is only one
+    let liOfLastItem = lastItem.getElementsByClassName("item_text")[0]  // There is only one
 
     // Check if lastItem was entered text; if so, add a new item under it
     if (liOfLastItem.textContent.trim() !== "") {
@@ -62,11 +62,11 @@ function addItem(fileTree, text) {
 }
 
 function deleteItem(fileTree, item) {
-    const items = fileTree.getElementsByTagName("li_wrapper");
+    const items = fileTree.getElementsByClassName("li_wrapper");
 
     if (items.length === 1) {
         let lastItem = items[0]
-        let liOfLastItem = lastItem.getElementsByTagName("item_text")[0]  // There is only one
+        let liOfLastItem = lastItem.getElementsByClassName("item_text")[0]  // There is only one
 
         liOfLastItem.textContent = "";  // Delete text content instead of deleting element
         return;

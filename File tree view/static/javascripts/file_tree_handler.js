@@ -12,11 +12,9 @@ function addPlaceholder(fileTree, placeHolderText) {
     const items = fileTree.getElementsByTagName("li");
     if (length(items) !== 0)
         return;  // Do not add placeholder if not empty
-    const firstItem = makeItem(placeHolderText);
-    fileTree.appendChild(firstItem);
-    firstItem.focus()
-}
 
+    addItem(fileTree, placeHolderText)
+}
 
 function makeItem(text) {
     // Make a new item, return a wrapper div with all buttons associated with the entry
@@ -49,10 +47,14 @@ function checkIfLastItemWasUsed(fileTree) {
 
     // Check if lastItem was entered text; if so, add a new item under it
     if (lastItem.textContent.trim() !== "") {
-        const newItem = makeItem();
-        fileTree.appendChild(newItem);
-        newItem.focus();
+        addItem(fileTree)  // Add a new item after it
     }
+}
+
+function addItem(fileTree, text) {
+    const newItem = makeItem(text);
+    fileTree.appendChild(newItem);
+    newItem.focus();
 }
 
 function deleteItem(fileTree, item) {

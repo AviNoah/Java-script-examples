@@ -3,28 +3,53 @@
 document.addEventListener("DOMContentLoaded", function () {
     let fileTrees = document.getElementsByClassName("file_tree");
     Array.from(fileTrees).forEach(fileTree => {
-        fileTree.addEventListener("input", () => { addItem(fileTree) });
+        addPlaceholder(fileTree, "Enter text")
+        fileTree.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree) });
     });
 });
 
-function addItem(fileTree) {
-    let items = fileTree.getElementsByTagName("li");
+function addPlaceholder(fileTree, placeHolderText) {
+    const items = fileTree.getElementsByTagName("li");
+    if (length(items) !== 0)
+        return;  // Do not add placeholder if not empty
+    const firstItem = makeItem(placeHolderText);
+    fileTree.appendChild(firstItem);
+    firstItem.focus()
+}
+
+
+function makeItem(text) {
+    // Make a new item, return a wrapper div with all buttons associated with the entry
+    let wrapperDiv = document.createElement("div");
+    wrapperDiv.classList.add("li_wrapper")
+
+    let newItem = document.createElement("li");
+    newItem.setAttribute("contenteditable", "true");
+    if (placeHolderText !== null)
+        newItem.setAttribute("textContent", text);
+
+    newItem.addEventListener("input", () => { checkIfLastItemWasUsed(fileTree) });
+
+    // Create a delete button with an image
+    let deleteButton = document.createElement("img");
+    deleteButton.setAttribute("src", "../static/images/Delete.svg");
+    deleteButton.setAttribute("alt", "Delete");
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", () => deleteItem(fileTree, wrapperDiv));
+
+    wrapperDiv.appendChild(deleteButton);
+    wrapperDiv.appendChild(newItem);
+
+    return wrapperDiv
+}
+
+function checkIfLastItemWasUsed(fileTree) {
+    const items = fileTree.getElementsByTagName("li");
     let lastItem = items[items.length - 1];
 
     // Check if lastItem was entered text; if so, add a new item under it
     if (lastItem.textContent.trim() !== "") {
-        let newItem = document.createElement("li");
-        newItem.setAttribute("contenteditable", "true");
-        newItem.addEventListener("input", (event) => { addItem(fileTree, event) });
-
-        // Create a delete button with an image
-        let deleteButton = document.createElement("img");
-        deleteButton.setAttribute("src", "../static/images/Delete.svg");
-        deleteButton.setAttribute("alt", "Delete");
-        deleteButton.classList.add("delete-button");
-        deleteButton.addEventListener("click", () => deleteItem(fileTree, newItem));
-
-        newItem.appendChild(deleteButton);
+        const newItem = makeItem();
         fileTree.appendChild(newItem);
         newItem.focus();
     }

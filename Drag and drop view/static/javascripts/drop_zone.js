@@ -14,8 +14,6 @@ class DragAndDropZone extends HTMLElement {
         this.style.alignItems = 'center';
         this.style.fontFamily = 'Arial, sans-serif';
         this.style.position = 'relative';
-        this.style.opacity = '1';
-
 
         document.addEventListener('dragenter', this.handleDragEnter.bind(this));
         document.addEventListener('dragleave', this.handleDragLeave.bind(this));

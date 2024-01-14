@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/styles/drop_zone_styles.css" />
+    <!-- <link rel="stylesheet" href="../static/styles/file_container_styles.css" /> -->
     <title>File folder view</title>
   </head>
   <body>
-    <div class="files-container">
-      <div class="files-folder"></div>
+    <div class="files-container drop-zone-container">
+      <drop-zone id="dropzone_main_page" class="files-folder"></drop-zone>
     </div>
+    <script src="../static/javascripts/drop_zone.js"></script>
   </body>
 </html>

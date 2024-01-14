@@ -11,12 +11,12 @@ body {
 }
 
 
-.drag-zone-container {
+.drop-zone-container {
     height: 50%;
     width: 20%;
 }
 
-.drag-zone {
+.drop-zone {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -33,13 +33,13 @@ body {
     /* Add a smooth transition for opacity changes */
 }
 
-.drag-zone.dragover {
+.drop-zone.dropover {
     opacity: 1;
     /* Set opacity to 1 when the file is dragged over */
     border-color: #333;
 }
 
-.drag-zone::before {
+.drop-zone::before {
     content: 'Drag file here';
     position: absolute;
     color: #555;

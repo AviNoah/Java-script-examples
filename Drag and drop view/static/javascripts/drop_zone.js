@@ -41,4 +41,4 @@ class DragAndDropZone extends HTMLElement {
 }
 
 // Define the custom element
-customElements.define('drag-zone', DragAndDropZone);
+customElements.define('drop-zone', DragAndDropZone);

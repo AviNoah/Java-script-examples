@@ -11,14 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('dragover', function (e) {
         e.preventDefault();
-
-        // Display the drop zone even when dragging over the entire document
-        handleDragEnter();
-    });
-
-    document.addEventListener('dragleave', function (e) {
-        // Handle dragleave on the entire document
-        handleDragLeave();
     });
 
     dropzone.addEventListener('drop', function (e) {

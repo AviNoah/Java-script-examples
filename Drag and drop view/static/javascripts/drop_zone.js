@@ -1,6 +1,25 @@
 class DragAndDropZone extends HTMLElement {
     constructor() {
         super();
+
+        // Create a shadow root
+        this.attachShadow({ mode: 'open' });
+
+        // Fetch the external CSS file and apply it to the shadow root
+        fetch('../static/styles/drop_zone_styles.css')
+            .then(response => response.text())
+            .then(cssText => {
+                // Define the styles within the shadow root
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        ${cssText}
+                    </style>
+                    <div id="dropzone_main_page" class="dropzone">
+                        <!-- Add any content you want within the custom element -->
+                    </div>
+                `;
+            })
+            .catch(error => console.error('Error fetching CSS:', error));
     }
 
     connectedCallback() {

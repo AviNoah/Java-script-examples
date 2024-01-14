@@ -17,9 +17,16 @@ body {
 }
 
 .drag-zone {
-    height: 100%;
+    box-sizing: border-box;
     width: 100%;
-    opacity: 1;
+    height: 100%;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    position: relative;
     /* Set initial opacity to make it partially transparent */
     transition: opacity 0.3s ease;
     /* Add a smooth transition for opacity changes */

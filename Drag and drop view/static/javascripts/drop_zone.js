@@ -4,17 +4,6 @@ class DragAndDropZone extends HTMLElement {
     }
 
     connectedCallback() {
-        // Set default styles for drag-zone
-        this.style.height = '100px';
-        this.style.width = '100px';
-        this.style.border = '2px dashed #aaa';
-        this.style.borderRadius = '8px';
-        this.style.display = 'flex';
-        this.style.justifyContent = 'center';
-        this.style.alignItems = 'center';
-        this.style.fontFamily = 'Arial, sans-serif';
-        this.style.position = 'relative';
-
         document.addEventListener('dragenter', this.handleDragEnter.bind(this));
         document.addEventListener('dragleave', this.handleDragLeave.bind(this));
         document.addEventListener('dragover', this.handleDragOver.bind(this));

@@ -1,0 +1,8 @@
+{
+    "name": "folder-file-view",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "Drop files into a folder like html window",
+    "author": "Avi Noah",
+    "license": "MIT"
+}

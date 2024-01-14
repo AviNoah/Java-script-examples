@@ -9,11 +9,13 @@ class DragAndDropZone extends HTMLElement {
         fetch('../static/styles/drop_zone_styles.css')
             .then(response => response.text())
             .then(cssText => {
-                // Define the styles within the shadow root
-                this.shadowRoot.innerHTML = `
-                    <style>
-                        ${cssText}
-                    </style>
+                // Create a style element and apply the CSS text
+                const styleElement = document.createElement('style');
+                styleElement.textContent = cssText;
+
+                // Append the style element and the dropzone container to the shadow root
+                this.shadowRoot.appendChild(styleElement);
+                this.shadowRoot.innerHTML += `
                     <div id="dropzone_main_page" class="dropzone">
                         <!-- Add any content you want within the custom element -->
                     </div>

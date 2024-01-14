@@ -5,8 +5,8 @@ class DragAndDropZone extends HTMLElement {
 
     connectedCallback() {
         // Set default styles for drag-zone
-        this.style.width = '80vw';
-        this.style.height = '80vh';
+        this.style.height = '100px';
+        this.style.width = '100px';
         this.style.border = '2px dashed #aaa';
         this.style.borderRadius = '8px';
         this.style.display = 'flex';

@@ -1,43 +1,44 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const dropzone = document.querySelector('.dropzone');
+class DragAndDropZone extends HTMLElement {
+    constructor() {
+        super();
+    }
 
-    dropzone.addEventListener('dragenter', function () {
-        handleDragEnter();
-    });
+    connectedCallback() {
+        document.addEventListener('dragenter', this.handleDragEnter.bind(this));
+        document.addEventListener('dragleave', this.handleDragLeave.bind(this));
+        document.addEventListener('dragover', this.handleDragOver.bind(this));
+        document.addEventListener('drop', this.handleDrop.bind(this));
+    }
 
-    dropzone.addEventListener('dragleave', function () {
-        handleDragLeave();
-    });
+    handleDragEnter() {
+        this.classList.add('dragover');
+    }
 
-    document.addEventListener('dragover', function (e) {
+    handleDragLeave() {
+        this.classList.remove('dragover');
+    }
+
+    handleDragOver(e) {
         e.preventDefault();
-    });
+        this.handleDragEnter();
+    }
 
-    dropzone.addEventListener('drop', function (e) {
+    handleDrop(e) {
         e.preventDefault();
-        handleDragLeave();
+        this.handleDragLeave();
 
-        // Check if the drop occurred on the drop zone or its children
-        if (isEventOnDropzone(e)) {
-            handle_dropped_files(e);
+        // Check if the drop occurred on the zone or its children
+        if (this.contains(e.target)) {
+            this.handleDroppedFiles(e);
         }
-    });
-
-    function handleDragEnter() {
-        dropzone.classList.add('dragover');
     }
 
-    function handleDragLeave() {
-        dropzone.classList.remove('dragover');
-    }
-
-    function isEventOnDropzone(event) {
-        return dropzone.contains(event.target);
-    }
-
-    function handle_dropped_files(event) {
+    handleDroppedFiles(event) {
         const files = event.dataTransfer.files;
         // Handle the dropped files as needed
-        console.log(files);
+        console.log('Dropped Files:', files);
     }
-});
+}
+
+// Define the custom element
+customElements.define('drag-zone', DragAndDropZone);

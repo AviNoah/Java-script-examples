@@ -54,7 +54,7 @@ function addFiles(event, files) {
     }
 
     // Populate the files folder div with files
-    files.forEach(file => {
+    Array.from(files).forEach(file => {
         const fileElement = document.createElement('div');
         fileElement.textContent = file.name;
         filesFolderDiv.appendChild(fileElement);

@@ -1,3 +1,4 @@
+import { addFiles } from './file_container_handler';
 class DragAndDropZone extends HTMLElement {
     constructor() {
         super();
@@ -37,6 +38,7 @@ class DragAndDropZone extends HTMLElement {
         const files = event.dataTransfer.files;
         // Handle the dropped files as needed
         console.log('Dropped Files:', files);
+        addFiles(event, files)
     }
 }
 

@@ -22,7 +22,7 @@ const selectorOptions = [
 
 export function populate(targetElement) {
     // Make sure there is only 1 filter on screen
-    const existingFilters = document.getElementsByClassName('filters_container');
+    const existingFilters = document.getElementsByClassName('multiple-filters-container');
     if (existingFilters)
         Array.from(existingFilters).forEach((existingFilter) => existingFilter.parentElement.removeChild(existingFilter));
 

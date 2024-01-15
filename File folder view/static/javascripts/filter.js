@@ -1,3 +1,5 @@
+import { removeElementFromContainer } from "./common.js";
+
 // A script to create filter elements and populate the filter lists of a file-view
 
 // files will contain a dictionary of {file_name: file_data}
@@ -18,19 +20,19 @@ const selectorOptions = [
     { value: 'regex', text: 'RegEx' }
 ];
 
-function populate(targetElement) {
+export function populate(targetElement) {
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
     filter_div.classList.add('filters_container');
 
     filters.forEach((filter_data) => {
-        filter_div.appendChild(populateFilter(filter_data));
+        filter_div.appendChild(populateFilter(filter_div, filter_data));
     })
 
     targetElement.appendChild(filter_div);
 }
 
-function populateFilter(filter_data) {
+function populateFilter(container, filter_data) {
     const { column, method, input } = filter_data;
 
     const filter = document.createElement('div');
@@ -59,10 +61,11 @@ function populateFilter(filter_data) {
     const submitButton = document.createElement('button');
     submitButton.classList.add('filter-submit');
     submitButton.textContent = 'Submit';
-    submitButton.addEventListener('click', () => { submit(column, selector, inpField) });
+    submitButton.addEventListener('click', () => submit(column, selector, inpField));
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('filter-delete', 'dangerous'); // elements marked dangerous will require confirm
+    deleteButton.addEventListener('click', () => removeElementFromContainer(container, filter, "Remove filter?"))
 
     filter.appendChild(selector);
     filter.appendChild(inpField);

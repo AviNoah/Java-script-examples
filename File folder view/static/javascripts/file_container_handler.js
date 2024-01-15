@@ -1,3 +1,6 @@
+import { populate } from "./filter.js";
+import { removeElementFromContainer } from "./common.js";
+
 export function addFiles(event, files) {
     // Get parent from event, in parent search for the div.files-folder
     const parentElement = event.target.parentElement;
@@ -44,7 +47,9 @@ function makeFileElement(container, file) {
 
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
-    deleteBtn.addEventListener("click", () => removeFileFromContainer(container, fileElement, file.name))
+    deleteBtn.addEventListener("click", () =>
+        removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`)
+    )
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
 
@@ -58,11 +63,3 @@ function makeFileElement(container, file) {
     return fileElement
 }
 
-function removeFileFromContainer(container, fileElement, file_name) {
-    const choice = confirm(`Are you sure you wish to delete ${file_name}?`)
-    console.log(`User deleted ${file_name}`)
-
-    if (choice)
-        container.removeChild(fileElement);
-
-}

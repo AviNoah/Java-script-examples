@@ -32,7 +32,7 @@ function makeFileElement(container, file) {
     buttonsWrapper.classList.add("file-view-buttons")
 
     let historyBtn = document.createElement('img');
-    historyBtn.classList.add("no-history")
+    historyBtn.classList.add("no-history");  // When history is added or changed update the class
     historyBtn.setAttribute("src", "../static/images/FullHistory.svg");
     historyBtn.setAttribute("alt", "Full history");
 

@@ -27,11 +27,11 @@
     height: 128px;
 }
 
-img .filter-icon {
+.filter-icon {
     transition: transform 0.3s ease-in-out;
 }
 
-img .filter-icon:hover {
+.filter-icon:hover {
     transform: scale(1.2);
 }
 

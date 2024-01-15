@@ -18,6 +18,7 @@ export function addFiles(event, files) {
         const fileElement = makeFileElement(filesFolderDiv, file)
         filesFolderDiv.appendChild(fileElement);
     });
+
 }
 
 function makeFileElement(container, file) {
@@ -42,6 +43,7 @@ function makeFileElement(container, file) {
 
     let queryListBtn = document.createElement('img');
     queryListBtn.classList.add("no-queries");  // When queries are added or changed update the class
+    queryListBtn.addEventListener('click', () => populate(fileElement));
     queryListBtn.setAttribute("src", "../static/images/QueryList.svg");
     queryListBtn.setAttribute("alt", "Filter list");
 
@@ -62,4 +64,3 @@ function makeFileElement(container, file) {
 
     return fileElement
 }
-

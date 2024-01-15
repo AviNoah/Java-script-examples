@@ -21,6 +21,11 @@ const selectorOptions = [
 ];
 
 export function populate(targetElement) {
+    // Make sure there is only 1 filter on screen
+    const existingFilter = document.querySelector('filters_container');
+    if (existingFilter)
+        existingFilter.parentElement.removeChild(existingFilter);
+
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
     filter_div.classList.add('filters_container');
@@ -30,6 +35,12 @@ export function populate(targetElement) {
     })
 
     targetElement.appendChild(filter_div);
+    document.addEventListener("click", (event) => {
+        if (!targetElement.contains(filter_div))
+            return;  // Return if not contains child
+        if (!targetElement.contains(event.target))
+            targetElement.removeChild(filter_div);  // Remove if click anywhere else on doc
+    })
 }
 
 function populateFilter(container, filter_data) {

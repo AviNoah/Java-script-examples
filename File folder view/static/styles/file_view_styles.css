@@ -27,11 +27,11 @@
     height: 128px;
 }
 
-.file-icon .selected::before {
+img .filter-icon {
     transition: transform 0.3s ease-in-out;
 }
 
-.file-icon .selected {
+img .filter-icon:hover {
     transform: scale(1.2);
 }
 

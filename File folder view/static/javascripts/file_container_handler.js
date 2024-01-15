@@ -65,3 +65,10 @@ function makeFileElement(container, file) {
 
     return fileElement
 }
+
+
+// Don't allow any image from the site to be dragged.
+document.addEventListener('dragstart', (event) => {
+    if (event.target.tagName === 'IMG')
+        event.preventDefault();
+})

@@ -28,7 +28,7 @@ export function populate(targetElement) {
 
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
-    filter_div.classList.add('filters-container');
+    filter_div.classList.add('multiple-filters-container');
 
     filters.forEach((filter_data) => {
         filter_div.appendChild(populateFilter(filter_div, filter_data));

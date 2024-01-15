@@ -3,11 +3,11 @@
     --dangerous_button: rgb(233, 71, 71);
 }
 
-.filters-container {
+.multiple-filters-container {
     border: 1px solid;
 }
 
-.filters-wrapper {}
+.filter-wrapper {}
 
 .filter-search-container {}
 

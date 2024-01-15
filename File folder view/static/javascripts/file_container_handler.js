@@ -22,7 +22,6 @@ export function addFiles(event, files) {
 }
 
 function makeFileElement(container, file) {
-    // TODO: Fix bug that allows you to append a file to the file item
     let fileElement = document.createElement('div');
     fileElement.classList.add('file-view')
 

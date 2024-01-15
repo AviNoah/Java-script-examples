@@ -8,9 +8,7 @@ export function addFiles(event, files) {
     // Get or create the files folder div
     let filesFolderDiv = parentElement.querySelector('.files-folder');
     if (!filesFolderDiv) {
-        filesFolderDiv = document.createElement('div');
-        filesFolderDiv.classList.add('files-folder');
-        parentElement.appendChild(filesFolderDiv);
+        return; // no file folder div found, this is not a place to dump files!
     }
 
     // Populate the files folder div with files
@@ -22,7 +20,6 @@ export function addFiles(event, files) {
 }
 
 function makeFileElement(container, file) {
-    // TODO: fix being able to drag a file into another file.
     let fileElement = document.createElement('div');
     fileElement.classList.add('file-view')
 

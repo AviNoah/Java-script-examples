@@ -5,17 +5,9 @@
 }
 
 .multiple-filters-container {
-    position: absolute;
     border: 1px solid;
     max-height: 300px;
     overflow-y: auto;
-}
-
-.filters-container {
-    position: relative;
-    display: none;
-    padding: 10px;
-    right: 0;
 }
 
 .filter-wrapper {

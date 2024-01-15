@@ -30,6 +30,10 @@ export function populate(targetElement) {
     const filter_div = document.createElement('div');
     filter_div.classList.add('multiple-filters-container');
 
+    const imageRect = targetElement.getBoundingClientRect();
+    filter_div.style.left = (imageRect.right + window.scrollX) + 'px';
+    filter_div.style.top = (imageRect.top + window.scrollY) + 'px';
+
     filters.forEach((filter_data) => {
         filter_div.appendChild(populateFilter(filter_div, filter_data));
     })

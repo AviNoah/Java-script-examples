@@ -5,6 +5,8 @@
 }
 
 .multiple-filters-container {
+    position: absolute;
+    display: inline-block;
     border: 1px solid;
     max-height: 300px;
     overflow-y: auto;

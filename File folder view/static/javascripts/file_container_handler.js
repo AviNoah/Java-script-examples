@@ -21,6 +21,9 @@ function makeFileElement(container, file) {
     let fileElement = document.createElement('div');
     fileElement.classList.add('file-view')
 
+    let fileDataWrapper = document.createElement('div');
+    fileDataWrapper.classList.add("file-data-wrapper")
+
     let imgElement = document.createElement('img');
     imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
     imgElement.setAttribute("alt", "Excel file");
@@ -28,13 +31,16 @@ function makeFileElement(container, file) {
     let textElement = document.createElement('p');
     textElement.textContent = file.name;
 
+    fileDataWrapper.appendChild(imgElement);
+    fileDataWrapper.appendChild(textElement);
+
     let buttonsWrapper = document.createElement('div');
     buttonsWrapper.classList.add("file-view-buttons")
 
-    let historyBtn = document.createElement('img');
-    historyBtn.classList.add("no-history");  // When history is added or changed update the class
-    historyBtn.setAttribute("src", "../static/images/FullHistory.svg");
-    historyBtn.setAttribute("alt", "Full history");
+    let queryListBtn = document.createElement('img');
+    queryListBtn.classList.add("no-queries");  // When queries are added or changed update the class
+    queryListBtn.setAttribute("src", "../static/images/QueryList.svg");
+    queryListBtn.setAttribute("alt", "Filter list");
 
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
@@ -42,11 +48,11 @@ function makeFileElement(container, file) {
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
 
-    buttonsWrapper.appendChild(historyBtn);
-    buttonsWrapper.appendChild(deleteBtn);
 
-    fileElement.appendChild(imgElement);
-    fileElement.appendChild(textElement);
+    buttonsWrapper.appendChild(deleteBtn);
+    buttonsWrapper.appendChild(queryListBtn);
+
+    fileElement.appendChild(fileDataWrapper);
     fileElement.appendChild(buttonsWrapper);
 
     return fileElement

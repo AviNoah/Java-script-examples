@@ -10,8 +10,8 @@ html {
 }
 
 .files-and-drag-zone-container {
-    width: 80%;
-    height: 80%;
+    width: 99%;
+    height: 99%;
 }
 
 drop-zone.files-folder {

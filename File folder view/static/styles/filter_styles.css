@@ -1,24 +1,39 @@
 :root {
     --normal_button: #7a3cff;
     --dangerous_button: rgb(233, 71, 71);
+    --selector_palette: #f8f8f8;
 }
 
 .multiple-filters-container {
     border: 1px solid;
 }
 
-.filter-wrapper {}
+.filter-wrapper {
+    padding: 10px;
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-.filter-search-container {}
+.filter-search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+}
 
 .filter-selector {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f8f8f8;
+    background-color: var(--selector_palette)
 }
 
-.filter-option {}
+.filter-option {
+    background-color: var(--selector_palette)
+}
 
 .filter-input {
     border: 1px solid #ccc;
@@ -30,7 +45,22 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.filter-buttons {}
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-buttons button {
+    /* Specific styling for buttons inside the filter popup */
+    border-radius: 10px;
+    margin-top: 3px;
+    margin-left: 3px;
+    width: 80px;
+    height: 20px;
+    color: white;
+}
 
 .filter-submit {}
 

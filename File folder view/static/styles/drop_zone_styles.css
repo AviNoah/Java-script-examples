@@ -10,6 +10,15 @@ body {
     width: 100%;
 }
 
+drop-zone::before {
+    position: absolute;
+    color: #555;
+    opacity: 0.3;
+    /* Set initial opacity to make it partially transparent */
+    transition: opacity 0.3s ease;
+    /* Add a smooth transition for opacity changes */
+}
+
 drop-zone {
     box-sizing: border-box;
     width: 100%;
@@ -21,20 +30,14 @@ drop-zone {
     align-items: center;
     font-family: Arial, sans-serif;
     position: relative;
-    opacity: 0.3;
-    /* Set initial opacity to make it partially transparent */
-    transition: opacity 0.3s ease;
-    /* Add a smooth transition for opacity changes */
+}
+
+drop-zone::after {
+    content: 'Drag file here';
 }
 
 drop-zone.dragover {
     opacity: 1;
     /* Set opacity to 1 when the file is dragged over */
     border-color: #333;
-}
-
-drop-zone::before {
-    content: 'Drag file here';
-    position: absolute;
-    color: #555;
 }

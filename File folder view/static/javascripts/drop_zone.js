@@ -55,10 +55,26 @@ function addFiles(event, files) {
 
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
-        const fileElement = document.createElement('div');
-        fileElement.textContent = file.name;
+        const fileElement = makeFileElement(file)
         filesFolderDiv.appendChild(fileElement);
     });
+}
+
+function makeFileElement(file) {
+    let fileElement = document.createElement('div');
+    fileElement.classList.add('file-view')
+
+    let imgElement = document.createElement('img');
+    imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
+    imgElement.setAttribute("alt", "Excel file");
+
+    let textElement = document.createElement('p')
+    textElement.textContent = file.name;
+
+    fileElement.appendChild(imgElement);
+    fileElement.appendChild(textElement);
+
+    return fileElement
 }
 
 // Define the custom element

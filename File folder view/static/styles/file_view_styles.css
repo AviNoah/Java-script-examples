@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../static/fonts/Roboto/Roboto-black.ttf') format('truetype');
+}
+
+.file-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.file-view p {
+    font-family: 'Roboto', sans-serif;
+}
+
+.file-view img {
+    width: 128px;
+    height: 128px;
+}

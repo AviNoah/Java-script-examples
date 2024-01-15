@@ -59,9 +59,13 @@
     margin-left: 3px;
     width: 80px;
     height: 20px;
-    color: white;
+    color: black;
 }
 
-.filter-submit {}
+.filter-submit {
+    fill: var(--normal_button);
+}
 
-.filter-delete {}
+.filter-delete {
+    fill: var(--dangerous_button);
+}

@@ -1,6 +1,4 @@
-import { DragAndDropZone } from "./drop_zone.js";
-
-function addFiles(event, files) {
+export function addFiles(event, files) {
     // Get parent from event, in parent search for the div.files-folder
     const parentElement = event.target.parentElement;
 
@@ -62,9 +60,3 @@ function removeFileFromContainer(container, fileElement, file_name) {
         container.removeChild(fileElement);
 
 }
-
-
-const dragAndDrop = DragAndDropZone(addFiles)
-
-// Define the custom element
-customElements.define('drop-zone', dragAndDrop);

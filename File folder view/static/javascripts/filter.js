@@ -28,7 +28,7 @@ export function populate(targetElement) {
 
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
-    filter_div.classList.add('filters_container');
+    filter_div.classList.add('filters-container');
 
     filters.forEach((filter_data) => {
         filter_div.appendChild(populateFilter(filter_div, filter_data));
@@ -47,7 +47,7 @@ function populateFilter(container, filter_data) {
     const { column, method, input } = filter_data;
 
     const filter = document.createElement('div');
-    filter.classList.add('filter', 'wrapper');
+    filter.classList.add('filter-wrapper');
 
     const selector = document.createElement('select');
     selector.classList.add('filter-selector');
@@ -66,6 +66,7 @@ function populateFilter(container, filter_data) {
     });
 
     const inpField = document.createElement('input');
+    inpField.classList.add('filter-input')
     inpField.type = 'text';
     inpField.value = input;
 

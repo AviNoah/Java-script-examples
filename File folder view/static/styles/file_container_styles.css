@@ -1,8 +1,8 @@
 :root {
     --items_in_row: 4;
     --grid_row_gap: 10px;
-    --max-height: 40%;
-    --max-width: 40%;
+    --max-height: 100%;
+    --max-width: 100%;
 }
 
 body,
@@ -14,9 +14,6 @@ html {
 .files-and-drag-zone-container {
     height: 99%;
     width: 99%;
-    max-height: var(--max-height);
-    max-width: var(--max-width);
-    overflow-y: auto;
 }
 
 drop-zone.files-folder {
@@ -27,6 +24,9 @@ drop-zone.files-folder {
     display: grid;
     grid-template-columns: repeat(var(--items_in_row), 1fr);
     grid-gap: var(--grid_row_gap);
+    max-height: var(--max-height);
+    max-width: var(--max-width);
+    overflow-y: auto;
 }
 
 /* The following code ensures that every nth item starts a new row */

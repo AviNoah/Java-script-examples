@@ -23,22 +23,37 @@ const selectorOptions = [
 export function populate(targetElement) {
     // Make sure there is only 1 filter on screen
     const existingFilters = document.getElementsByClassName('multiple-filters-container');
-    if (existingFilters)
+    if (existingFilters.length > 0)
         Array.from(existingFilters).forEach((existingFilter) => existingFilter.parentElement.removeChild(existingFilter));
 
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
     filter_div.classList.add('multiple-filters-container');
 
-    const imageRect = targetElement.getBoundingClientRect();
-    filter_div.style.left = (imageRect.right + window.scrollX) + 'px';
-    filter_div.style.top = (imageRect.top + window.scrollY) + 'px';
-
     filters.forEach((filter_data) => {
         filter_div.appendChild(populateFilter(filter_div, filter_data));
     })
 
     targetElement.appendChild(filter_div);
+
+    // Position filter pop up
+    const imageRect = targetElement.getBoundingClientRect();
+    const width = filter_div.offsetWidth;
+    const height = filter_div.offsetHeight;
+    let left = imageRect.right + window.scrollX
+    let top = imageRect.top + window.scrollY
+
+    // Check if it goes out of bounds
+    if (left + width > window.innerWidth)
+        left = imageRect.left;
+
+    if (top + height > window.innerHeight)
+        top = imageRect.bottom - height;
+
+    filter_div.style.left = left + 'px';
+    filter_div.style.top = top + 'px';
+
+
     document.addEventListener("click", (event) => {
         if (!targetElement.contains(filter_div))
             return;  // Return if not contains child

@@ -31,7 +31,7 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.filter-icon:hover {
+.filter-icon:hover:not(.selected-file) {
     transform: scale(1.2);
 }
 

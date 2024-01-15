@@ -76,6 +76,7 @@ function populateFilter(container, filter_data) {
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('filter-delete', 'dangerous'); // elements marked dangerous will require confirm
+    submitButton.textContent = 'Delete filter';
     deleteButton.addEventListener('click', () => removeElementFromContainer(container, filter, "Remove filter?"))
 
     filter.appendChild(selector);

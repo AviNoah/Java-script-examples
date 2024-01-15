@@ -1,7 +1,7 @@
-import { addFiles } from "./file_container_handler.js";
-class DragAndDropZone extends HTMLElement {
-    constructor() {
+export class DragAndDropZone extends HTMLElement {
+    constructor(func) {
         super();
+        this.fileHandler = func
     }
 
     connectedCallback() {
@@ -36,11 +36,6 @@ class DragAndDropZone extends HTMLElement {
 
     handleDroppedFiles(event) {
         const files = event.dataTransfer.files;
-        // Handle the dropped files as needed
-        console.log('Dropped Files:', files);
-        addFiles(event, files)
+        this.fileHandler(event, files)
     }
 }
-
-// Define the custom element
-customElements.define('drop-zone', DragAndDropZone);

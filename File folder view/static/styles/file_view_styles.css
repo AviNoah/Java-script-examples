@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('../static/fonts/Roboto/Roboto-black.ttf') format('truetype');
+    src: url('../fonts/Roboto/Roboto-Medium.ttf') format('truetype');
 }
 
 .file-view {
@@ -18,4 +18,27 @@
 .file-view img {
     width: 128px;
     height: 128px;
+}
+
+.file-view-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-view-buttons img {
+    width: 24px;
+    height: 24px;
+    padding: 0 4px;
+}
+
+.no-history {
+    /* Turn gray */
+    filter: invert(58%) sepia(12%) saturate(0%) hue-rotate(211deg) brightness(93%) contrast(91%);
+}
+
+.delete {
+    /* Turn red */
+    filter: invert(24%) sepia(38%) saturate(5794%) hue-rotate(347deg) brightness(99%) contrast(102%);
 }

@@ -41,6 +41,9 @@ class DragAndDropZone extends HTMLElement {
     }
 }
 
+// Define the custom element
+customElements.define('drop-zone', DragAndDropZone);
+
 function addFiles(event, files) {
     // Get parent from event, in parent search for the div.files-folder
     const parentElement = event.target.parentElement; // Change this line based on your actual HTML structure
@@ -68,14 +71,28 @@ function makeFileElement(file) {
     imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
     imgElement.setAttribute("alt", "Excel file");
 
-    let textElement = document.createElement('p')
+    let textElement = document.createElement('p');
     textElement.textContent = file.name;
+
+    let buttonsWrapper = document.createElement('div');
+    buttonsWrapper.classList.add("file-view-buttons")
+
+    let historyBtn = document.createElement('img');
+    historyBtn.classList.add("no-history")
+    historyBtn.setAttribute("src", "../static/images/FullHistory.svg");
+    historyBtn.setAttribute("alt", "Full history");
+
+    let deleteBtn = document.createElement('img');
+    deleteBtn.classList.add("delete")
+    deleteBtn.setAttribute("src", "../static/images/Delete.svg");
+    deleteBtn.setAttribute("alt", "Delete");
+
+    buttonsWrapper.appendChild(historyBtn);
+    buttonsWrapper.appendChild(deleteBtn);
 
     fileElement.appendChild(imgElement);
     fileElement.appendChild(textElement);
+    fileElement.appendChild(buttonsWrapper);
 
     return fileElement
 }
-
-// Define the custom element
-customElements.define('drop-zone', DragAndDropZone);

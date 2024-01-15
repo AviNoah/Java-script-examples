@@ -26,6 +26,8 @@ export function populate(targetElement) {
     if (existingFilters.length > 0)
         Array.from(existingFilters).forEach((existingFilter) => existingFilter.parentElement.removeChild(existingFilter));
 
+    const imageRect = targetElement.getBoundingClientRect();
+    console.log(imageRect)
     const filters = requestFileData(targetElement);
     const filter_div = document.createElement('div');
     filter_div.classList.add('multiple-filters-container');
@@ -36,11 +38,11 @@ export function populate(targetElement) {
 
     targetElement.appendChild(filter_div);
 
+    // TODO: fix this checker
     // Position filter pop up
-    const imageRect = targetElement.getBoundingClientRect();
     const width = filter_div.offsetWidth;
     const height = filter_div.offsetHeight;
-    let left = imageRect.right + window.scrollX
+    let left = imageRect.left - width
     let top = imageRect.top + window.scrollY
 
     // Check if it goes out of bounds

@@ -1,12 +1,36 @@
-.filters-container {}
+:root {
+    --normal_button: #7a3cff;
+    --dangerous_button: rgb(233, 71, 71);
+}
+
+.filters-container {
+    border: 1px solid;
+}
 
 .filters-wrapper {}
 
-.filter-selector {}
+.filter-search-container {}
+
+.filter-selector {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
 
 .filter-option {}
 
-.filter-input {}
+.filter-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.filter-input input:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.filter-buttons {}
 
 .filter-submit {}
 

@@ -49,6 +49,9 @@ function populateFilter(container, filter_data) {
     const filter = document.createElement('div');
     filter.classList.add('filter-wrapper');
 
+    const searchCriteriaContainerDiv = document.createElement('div');
+    searchCriteriaContainerDiv.classList.add('filter-search-container')
+
     const selector = document.createElement('select');
     selector.classList.add('filter-selector');
 
@@ -70,6 +73,12 @@ function populateFilter(container, filter_data) {
     inpField.type = 'text';
     inpField.value = input;
 
+    searchCriteriaContainerDiv.appendChild(selector);
+    searchCriteriaContainerDiv.appendChild(inpField);
+
+    const buttonDiv = document.createElement('div');
+    buttonDiv.classList.add('filter-buttons');
+
     const submitButton = document.createElement('button');
     submitButton.classList.add('filter-submit');
     submitButton.textContent = 'Submit';
@@ -80,10 +89,11 @@ function populateFilter(container, filter_data) {
     submitButton.textContent = 'Delete filter';
     deleteButton.addEventListener('click', () => removeElementFromContainer(container, filter, "Remove filter?"))
 
-    filter.appendChild(selector);
-    filter.appendChild(inpField);
-    filter.appendChild(submitButton);
-    filter.appendChild(deleteButton);
+    buttonDiv.appendChild(submitButton);
+    buttonDiv.appendChild(deleteButton);
+
+    filter.appendChild(searchCriteriaContainerDiv);
+    filter.appendChild(buttonDiv);
 
     return filter;
 }

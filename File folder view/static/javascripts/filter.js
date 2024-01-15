@@ -30,8 +30,11 @@ export function populate(targetElement) {
     const filter_div = document.createElement('div');
     filter_div.classList.add('multiple-filters-container');
 
+    const container = document.createElement('filters-container')
+    filter_div.appendChild(container)
+
     filters.forEach((filter_data) => {
-        filter_div.appendChild(populateFilter(filter_div, filter_data));
+        container.appendChild(populateFilter(filter_div, filter_data));
     })
 
     targetElement.appendChild(filter_div);

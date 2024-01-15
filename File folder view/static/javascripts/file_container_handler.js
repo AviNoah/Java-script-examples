@@ -29,6 +29,18 @@ function makeFileElement(container, file) {
     let imgElement = document.createElement('img');
     imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
     imgElement.setAttribute("alt", "Excel file");
+    imgElement.classList.add('filter-icon')
+    imgElement.addEventListener("click", () => {
+        // Deselect old
+        Array.from(container.getElementsByClassName('selected-file')).forEach((img) => {
+            img.setAttribute("src", "../static/images/excel_logo_closed.svg");
+            img.classList.remove('selected-file');
+        })
+
+
+        imgElement.classList.add('selected-file');
+        imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
+    })
 
     let textElement = document.createElement('p');
     textElement.textContent = file.name;

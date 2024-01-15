@@ -1,3 +1,5 @@
+/* TODO: when filter pane opens the window gets stretched, this is uncouth, fix this*/
+
 :root {
     --items_in_row: 4;
     --grid_row_gap: 10px;

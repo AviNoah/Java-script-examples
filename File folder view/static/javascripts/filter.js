@@ -18,6 +18,8 @@ function populate(targetElement) {
     Array.from(filters).forEach((filter_data) => {
         filter_div.appendChild(populateFilter(filter_data));
     })
+
+    targetElement.appendChild(filter_div)
 }
 
 selectorOptions = [
@@ -33,16 +35,16 @@ function populateFilter(filter_data) {
     const method = Object.keys(filter_data[1]);
     const filter_input = filter_data[1][method];
 
-    const filter = createElement('div');
+    const filter = document.createElement('div');
     filter.classList.add('filter wrapper');
 
-    const selector = createElement('select');
-    selector.classList.add('filter-selector')
+    const selector = document.createElement('select');
+    selector.classList.add('filter-selector');
 
     // Iterate through the data and add options to the select element
     selectorOptions.forEach(item => {
         const option = document.createElement('option');
-        option.classList.add("filter-option")
+        option.classList.add("filter-option");
         option.value = item.value;
         option.text = item.text;
 
@@ -52,15 +54,16 @@ function populateFilter(filter_data) {
         selectElement.appendChild(option);
     });
 
-    const inpField = createElement('input');
+    const inpField = document.createElement('input');
     inpField.type = "text";
     inpField.value = filter_input;
 
-    const submitButton = createElement('button');
+    const submitButton = document.createElement('button');
     submitButton.classList.add('filter-submit');
-    submitButton.text = "Submit"
+    submitButton.text = "Submit";
+    submitButton.addEventListener("click", () => { submit(selector, inpField) });
 
-    const deleteButton = createElement('button');
+    const deleteButton = document.createElement('button');
     deleteButton.classList.add('filter-delete');
     deleteButton.classList.add('dangerous'); // elements marked dangerous will require confirm
 
@@ -72,7 +75,14 @@ function populateFilter(filter_data) {
     return filter;
 }
 
+function submit(selector, inpField) {
+    const selection = selector.value;
+    const input = inpField.value;
+
+    // Send to back end to process, implement later
+}
+
 function requestFileData(targetElement) {
     // Request from back end the file data
-    return files['test_file.xlsx']
+    return files['test_file.xlsx'];  // implement later
 }

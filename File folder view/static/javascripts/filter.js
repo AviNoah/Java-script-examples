@@ -21,6 +21,7 @@ const selectorOptions = [
 ];
 
 export function populate(targetElement) {
+    // TODO: fix bug that allows you to open multiple lists on the same file
     // Make sure there is only 1 filter on screen
     const existingFilter = document.querySelector('filters_container');
     if (existingFilter)

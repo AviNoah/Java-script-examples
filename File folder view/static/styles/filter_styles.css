@@ -2,12 +2,15 @@
     --normal_button: #7a3cff;
     --dangerous_button: rgb(233, 71, 71);
     --selector_palette: #f8f8f8;
+    --filters-background: #f8f8f8;;
 }
 
 .multiple-filters-container {
     position: absolute;
     display: inline-block;
     border: 1px solid;
+    background-color: var(--filters-background);
+    z-index: 100;
     max-height: 300px;
     overflow-y: auto;
 }

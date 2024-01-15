@@ -46,7 +46,7 @@ customElements.define('drop-zone', DragAndDropZone);
 
 function addFiles(event, files) {
     // Get parent from event, in parent search for the div.files-folder
-    const parentElement = event.target.parentElement; // Change this line based on your actual HTML structure
+    const parentElement = event.target.parentElement;
 
     // Get or create the files folder div
     let filesFolderDiv = parentElement.querySelector('.files-folder');
@@ -58,12 +58,12 @@ function addFiles(event, files) {
 
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
-        const fileElement = makeFileElement(file)
+        const fileElement = makeFileElement(filesFolderDiv, file)
         filesFolderDiv.appendChild(fileElement);
     });
 }
 
-function makeFileElement(file) {
+function makeFileElement(container, file) {
     let fileElement = document.createElement('div');
     fileElement.classList.add('file-view')
 
@@ -84,6 +84,7 @@ function makeFileElement(file) {
 
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
+    deleteBtn.addEventListener("click", () => removeFileFromContainer(container, fileElement, file.name))
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
 
@@ -95,4 +96,13 @@ function makeFileElement(file) {
     fileElement.appendChild(buttonsWrapper);
 
     return fileElement
+}
+
+function removeFileFromContainer(container, fileElement, file_name) {
+    const choice = confirm(`Are you sure you wish to delete ${file_name}?`)
+    console.log(`User deleted ${file_name}`)
+    
+    if (choice)
+        container.removeChild(fileElement);
+
 }

@@ -1,6 +1,8 @@
 :root {
     --items_in_row: 4;
     --grid_row_gap: 10px;
+    --max-height: 40%;
+    --max-width: 40%;
 }
 
 body,
@@ -10,8 +12,11 @@ html {
 }
 
 .files-and-drag-zone-container {
-    width: 99%;
     height: 99%;
+    width: 99%;
+    max-height: var(--max-height);
+    max-width: var(--max-width);
+    overflow-y: auto;
 }
 
 drop-zone.files-folder {

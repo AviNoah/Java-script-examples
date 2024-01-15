@@ -22,6 +22,7 @@ export function addFiles(event, files) {
 }
 
 function makeFileElement(container, file) {
+    // TODO: fix being able to drag a file into another file.
     let fileElement = document.createElement('div');
     fileElement.classList.add('file-view')
 

@@ -18,7 +18,6 @@
     align-items: center;
 }
 
-/* TODO: Word wrap when too long */
 .file-view p {
     font-family: 'Roboto', sans-serif;
     word-wrap: break-word;

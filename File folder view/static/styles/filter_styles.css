@@ -6,8 +6,6 @@
     --deactivated_button: rgb(197, 195, 195);
 }
 
-/* TODO: make a column field to choose the column it effects */
-
 /* For positioning */
 .filter-popup-container {
     position: absolute;

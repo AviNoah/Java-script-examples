@@ -9,8 +9,10 @@
 /* TODO: make a column field to choose the column it effects */
 
 .multiple-filters-container {
-    position: absolute;
+    position: fixed;
     display: inline-block;
+    margin-right: 100px;
+    margin-bottom: 200px;
 }
 
 .multiple-filters-container {

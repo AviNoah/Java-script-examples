@@ -60,7 +60,7 @@ function populateFilter(container, filter_data) {
     searchCriteriaContainerDiv.classList.add('filter-search-container')
 
     const selectorColumn = document.createElement('select');
-    columnParagraph.classList.add('filter-selector');
+    selectorColumn.classList.add('filter-selector');
 
     // Iterate through columns and add to selector
     const columnsOptions = requestColumns();  // fetch all columns of the spreadsheet

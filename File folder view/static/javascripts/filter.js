@@ -145,3 +145,8 @@ function requestFileData(targetElement) {
     // Request from back end the file data
     return files['test_file.xlsx'];  // implement later
 }
+
+function requestColumns() {
+    // Request columns of the selected datasheet from back-end
+    // TODO: Implement later
+}

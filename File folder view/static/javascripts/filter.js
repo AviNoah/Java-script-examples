@@ -22,20 +22,23 @@ const selectorOptions = [
 
 export function populate(targetElement) {
     // Make sure there is only 1 filter on screen
-    const existingFilters = document.getElementsByClassName('multiple-filters-container');
+    const existingFilters = document.getElementsByClassName('filter-popup-wrapper');
     if (existingFilters.length > 0)
         Array.from(existingFilters).forEach((existingFilter) => existingFilter.parentElement.removeChild(existingFilter));
 
     // Populate list with filters and create pop up
     const filters = requestFileData(targetElement);
     const filterDiv = document.createElement('div');
-    filterDiv.classList.add('multiple-filters-container');
+    filterDiv.classList.add('filter-popup-wrapper');
 
     filters.forEach((filter_data) => {
         filterDiv.appendChild(populateFilter(filterDiv, filter_data));
     })
 
-    targetElement.appendChild(filterDiv);
+    const container = document.createElement('div');
+    container.classList.add('filter-popup-container');
+    container.appendChild(filterDiv)
+    targetElement.appendChild(container);
 
     document.addEventListener("click", (event) => {
         if (!targetElement.contains(filterDiv))

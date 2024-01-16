@@ -8,20 +8,24 @@
 
 /* TODO: make a column field to choose the column it effects */
 
-.multiple-filters-container {
-    position: fixed;
+.filter-popup-container {
+    position: relative;
     display: inline-block;
-    margin-right: 100px;
-    margin-bottom: 200px;
-}
-
-.multiple-filters-container {
     border: 1px solid;
     background-color: var(--filters-background);
-    z-index: 100;
-    max-height: 300px;
     overflow-y: auto;
+    max-height: 300px;
 }
+
+.filter-popup-wrapper {
+    z-index: 2;
+    display: contents;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 .filter-wrapper {
     padding: 10px;

@@ -100,8 +100,17 @@ function populateFilter(container, filter_data) {
     filter.appendChild(searchCriteriaContainerDiv);
     filter.appendChild(buttonDiv);
 
-    filter.addEventListener('change', () => { submitButton.classList.add('changed') })
+    // check if any change happens on the filter
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function () {
+            submitButton.classList.add('changed')
+        });
+    });
 
+    // Observe children and descendants as well
+    const config = { childList: true, subtree: true };
+
+    observer.observe(filter, config);
     return filter;
 }
 

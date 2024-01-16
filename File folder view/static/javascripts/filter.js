@@ -97,6 +97,7 @@ function populateFilter(container, filter_data) {
     inpField.type = 'text';
     inpField.value = input;
 
+    searchCriteriaContainerDiv.appendChild(selectorColumn);
     searchCriteriaContainerDiv.appendChild(selectorMethod);
     searchCriteriaContainerDiv.appendChild(inpField);
 

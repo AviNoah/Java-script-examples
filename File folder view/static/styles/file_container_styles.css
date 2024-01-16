@@ -24,6 +24,7 @@ drop-zone.files-folder {
 
 .files-folder {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(var(--items_in_row), 1fr);
     grid-gap: var(--grid_row_gap);
     max-height: var(--max-height);

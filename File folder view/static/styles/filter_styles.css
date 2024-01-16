@@ -8,22 +8,26 @@
 
 /* TODO: make a column field to choose the column it effects */
 
+/* For positioning */
 .filter-popup-container {
-    position: relative;
+    position: absolute;
     display: inline-block;
+    z-index: 2;
+}
+
+/* For styling */
+.filter-popup-wrapper {
     border: 1px solid;
     background-color: var(--filters-background);
     overflow-y: auto;
+    overflow-x: auto;
     max-height: 300px;
-}
 
-.filter-popup-wrapper {
-    z-index: 2;
-    display: contents;
-    position: absolute;
+    /*
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+    */
 }
 
 

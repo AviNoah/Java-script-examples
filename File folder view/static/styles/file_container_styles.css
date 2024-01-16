@@ -18,10 +18,6 @@ html {
     width: 99%;
 }
 
-drop-zone.files-folder {
-    opacity: 1 !important;
-}
-
 .files-folder {
     display: grid;
     position: relative;

@@ -3,7 +3,7 @@
     --dangerous_button: rgb(233, 71, 71);
     --selector_palette: #f8f8f8;
     --filters-background: #f8f8f8;
-    ;
+    --deactivated_button: rgb(197, 195, 195);
 }
 
 /* TODO: make a column field to choose the column it effects */
@@ -78,8 +78,12 @@
     color: white;
 }
 
-.filter-submit {
+.filter-submit .changed {
     background-color: var(--normal_button);
+}
+
+.filter-submit:not(.changed) {
+    background-color: var(--deactivated_button);
 }
 
 .filter-delete {

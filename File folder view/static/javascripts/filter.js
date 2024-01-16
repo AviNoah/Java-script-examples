@@ -100,6 +100,8 @@ function populateFilter(container, filter_data) {
     filter.appendChild(searchCriteriaContainerDiv);
     filter.appendChild(buttonDiv);
 
+    filter.addEventListener('change', () => { submitButton.classList.add('changed') })
+
     return filter;
 }
 

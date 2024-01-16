@@ -26,41 +26,34 @@ export function populate(targetElement) {
     if (existingFilters.length > 0)
         Array.from(existingFilters).forEach((existingFilter) => existingFilter.parentElement.removeChild(existingFilter));
 
-    const imageRect = targetElement.getBoundingClientRect();
-    console.log(imageRect)
+    // Populate list with filters and create pop up
     const filters = requestFileData(targetElement);
-    const filter_div = document.createElement('div');
-    filter_div.classList.add('multiple-filters-container');
+    const filterDiv = document.createElement('div');
+    filterDiv.classList.add('multiple-filters-container');
 
     filters.forEach((filter_data) => {
-        filter_div.appendChild(populateFilter(filter_div, filter_data));
+        filterDiv.appendChild(populateFilter(filterDiv, filter_data));
     })
 
-    targetElement.appendChild(filter_div);
+    const container = targetElement.parentElement;
 
-    // TODO: fix this checker
-    // Position filter pop up
-    const width = filter_div.offsetWidth;
-    const height = filter_div.offsetHeight;
-    let left = imageRect.left - width
-    let top = imageRect.top + window.scrollY
+    targetElement.appendChild(filterDiv);
 
-    // Check if it goes out of bounds
-    if (left + width > window.innerWidth)
-        left = imageRect.left;
+    const containerRect = container.getBoundingClientRect();
+    const targetRect = targetElement.getBoundingClientRect();
 
-    if (top + height > window.innerHeight)
-        top = imageRect.bottom - height;
+    let left = targetRect.left - containerRect.left;
+    let top = targetRect.bottom - containerRect.top;
 
-    filter_div.style.left = left + 'px';
-    filter_div.style.top = top + 'px';
+    filterDiv.style.left = left + 'px';
+    filterDiv.style.top = top + 'px';
 
 
     document.addEventListener("click", (event) => {
-        if (!targetElement.contains(filter_div))
+        if (!targetElement.contains(filterDiv))
             return;  // Return if not contains child
         if (!targetElement.contains(event.target))
-            targetElement.removeChild(filter_div);  // Remove if click anywhere else on doc
+            targetElement.removeChild(filterDiv);  // Remove if click anywhere else on doc
     })
 }
 

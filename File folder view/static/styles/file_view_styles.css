@@ -21,6 +21,8 @@
 /* TODO: Word wrap when too long */
 .file-view p {
     font-family: 'Roboto', sans-serif;
+    word-wrap: break-word;
+    max-width: 150px;
 }
 
 .file-view img {

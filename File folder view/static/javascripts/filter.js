@@ -149,4 +149,5 @@ function requestFileData(targetElement) {
 function requestColumns() {
     // Request columns of the selected datasheet from back-end
     // TODO: Implement later
+    return ['ID', 'Name', 'Surname']
 }

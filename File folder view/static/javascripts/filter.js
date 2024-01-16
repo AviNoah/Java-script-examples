@@ -80,12 +80,13 @@ function populateFilter(container, filter_data) {
     selectorMethod.classList.add('filter-selector');
 
     // Iterate through possible methods and add to selector
-    methodOptions.forEach((method) => {
+    methodOptions.forEach((itemMethod) => {
         const option = document.createElement('option');
         option.classList.add('filter-option');
-        option.value = method.value;
-        option.text = method.text;
+        option.value = itemMethod.value;
+        option.text = itemMethod.text;
 
+        console.log(option.value, itemMethod)
         if (option.value === method)
             option.selected = true;
 

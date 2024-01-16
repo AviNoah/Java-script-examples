@@ -67,10 +67,10 @@ function populateFilter(container, filter_data) {
     columnsOptions.forEach((columnItem) => {
         const option = document.createElement('option');
         option.classList.add('filter-option');
-        option.value = columnItem.value;
-        option.text = columnItem.text;
+        option.value = columnItem;
+        option.text = columnItem;
 
-        if (option.value === method)
+        if (option.value === column)
             option.selected = true;
 
         selectorColumn.appendChild(option);

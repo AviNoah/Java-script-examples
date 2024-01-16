@@ -44,7 +44,7 @@ export function populate(targetElement) {
         if (!targetElement.contains(filterDiv))
             return;  // Return if not contains child
         if (!targetElement.contains(event.target))
-            targetElement.removeChild(filterDiv);  // Remove if click anywhere else on doc
+            targetElement.removeChild(container);  // Remove if click anywhere else on doc
     })
 }
 

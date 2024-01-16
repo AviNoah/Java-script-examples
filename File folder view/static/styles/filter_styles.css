@@ -20,14 +20,7 @@
     border: 1px solid;
     background-color: var(--filters-background);
     overflow-y: auto;
-    overflow-x: auto;
     max-height: 300px;
-
-    /*
-    top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    */
 }
 
 

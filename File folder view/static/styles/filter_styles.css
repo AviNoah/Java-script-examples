@@ -78,7 +78,7 @@
     color: white;
 }
 
-.filter-submit .changed {
+.filter-submit {
     background-color: var(--normal_button);
 }
 

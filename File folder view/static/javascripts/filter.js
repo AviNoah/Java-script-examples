@@ -106,7 +106,7 @@ function populateFilter(container, filter_data) {
 
     const submitButton = document.createElement('button');
     submitButton.classList.add('filter-submit');
-    submitButton.textContent = 'Submit';
+    submitButton.textContent = 'Update';
     submitButton.addEventListener('click', () => submit(column, selectorMethod, inpField));
 
     const deleteButton = document.createElement('button');

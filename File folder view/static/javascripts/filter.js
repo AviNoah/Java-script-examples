@@ -13,7 +13,7 @@ const files = {
         ]
 }
 
-const selectorOptions = [
+const methodOptions = [
     { value: 'exact', text: 'Exact match' },
     { value: 'contains', text: 'Contains' },
     { value: 'not contains', text: 'Does not contain' },
@@ -59,20 +59,37 @@ function populateFilter(container, filter_data) {
     const searchCriteriaContainerDiv = document.createElement('div');
     searchCriteriaContainerDiv.classList.add('filter-search-container')
 
-    const selector = document.createElement('select');
-    selector.classList.add('filter-selector');
+    const selectorColumn = document.createElement('select');
+    columnParagraph.classList.add('filter-selector');
 
-    // Iterate through the data and add options to the select element
-    selectorOptions.forEach((item) => {
+    // Iterate through columns and add to selector
+    const columnsOptions = requestColumns();  // fetch all columns of the spreadsheet
+    columnsOptions.forEach((columnItem) => {
         const option = document.createElement('option');
         option.classList.add('filter-option');
-        option.value = item.value;
-        option.text = item.text;
+        option.value = columnItem.value;
+        option.text = columnItem.text;
 
         if (option.value === method)
             option.selected = true;
 
-        selector.appendChild(option);
+        selectorMethod.appendChild(option);
+    });
+
+    const selectorMethod = document.createElement('select');
+    selectorMethod.classList.add('filter-selector');
+
+    // Iterate through possible methods and add to selector
+    methodOptions.forEach((method) => {
+        const option = document.createElement('option');
+        option.classList.add('filter-option');
+        option.value = method.value;
+        option.text = method.text;
+
+        if (option.value === method)
+            option.selected = true;
+
+        selectorMethod.appendChild(option);
     });
 
     const inpField = document.createElement('input');
@@ -80,7 +97,7 @@ function populateFilter(container, filter_data) {
     inpField.type = 'text';
     inpField.value = input;
 
-    searchCriteriaContainerDiv.appendChild(selector);
+    searchCriteriaContainerDiv.appendChild(selectorMethod);
     searchCriteriaContainerDiv.appendChild(inpField);
 
     const buttonDiv = document.createElement('div');
@@ -89,7 +106,7 @@ function populateFilter(container, filter_data) {
     const submitButton = document.createElement('button');
     submitButton.classList.add('filter-submit');
     submitButton.textContent = 'Submit';
-    submitButton.addEventListener('click', () => submit(column, selector, inpField));
+    submitButton.addEventListener('click', () => submit(column, selectorMethod, inpField));
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('filter-delete', 'dangerous'); // elements marked dangerous will require confirm

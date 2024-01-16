@@ -8,8 +8,8 @@ const files = {
     'test_file.xlsx':
         [
             { column: "ID", method: 'regex', input: '\d+' },
-            { column: "Name", method: 'contains', input: 'Avi' },
-            { column: "Surname", method: 'contains', input: 'Noah' }
+            { column: "Name", method: 'contains', input: 'MyName' },
+            { column: "Surname", method: 'contains', input: 'MyFamilyName' }
         ]
 }
 

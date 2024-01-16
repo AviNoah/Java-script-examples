@@ -8,7 +8,7 @@
 
 /* TODO: make a column field to choose the column it effects */
 
-.multiple-filters-container {
+.multiple-filters-container::before {
     position: absolute;
     display: inline-block;
     border: 1px solid;

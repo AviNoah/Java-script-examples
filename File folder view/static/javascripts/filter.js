@@ -35,19 +35,7 @@ export function populate(targetElement) {
         filterDiv.appendChild(populateFilter(filterDiv, filter_data));
     })
 
-    const container = targetElement.parentElement;
-
     targetElement.appendChild(filterDiv);
-
-    const containerRect = container.getBoundingClientRect();
-    const targetRect = targetElement.getBoundingClientRect();
-
-    let left = targetRect.left - containerRect.left;
-    let top = targetRect.bottom - containerRect.top;
-
-    filterDiv.style.left = left + 'px';
-    filterDiv.style.top = top + 'px';
-
 
     document.addEventListener("click", (event) => {
         if (!targetElement.contains(filterDiv))

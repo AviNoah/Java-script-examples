@@ -43,8 +43,10 @@ export function populate(targetElement) {
     document.addEventListener("click", (event) => {
         if (!targetElement.contains(filterDiv))
             return;  // Return if not contains child
-        if (!targetElement.contains(event.target))
+        if (!targetElement.contains(event.target)) {
+            sendChanges(targetElement, container); // Send changes
             targetElement.removeChild(container);  // Remove if click anywhere else on doc
+        }
     })
 }
 
@@ -115,6 +117,10 @@ function submit(column, selector, inpField) {
 
     // Send to back end to process, implement later
     console.log(`Column: ${column}, Method: ${method}, Input: ${input}`);
+}
+
+function sendChanges(fileTarget, filtersContainer) {
+    // TODO: send the changed filters to the fileTarget's folder at back-end and save them
 }
 
 function requestFileData(targetElement) {

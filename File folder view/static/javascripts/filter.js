@@ -86,7 +86,6 @@ function populateFilter(container, filter_data) {
         option.value = itemMethod.value;
         option.text = itemMethod.text;
 
-        console.log(option.value, itemMethod)
         if (option.value === method)
             option.selected = true;
 

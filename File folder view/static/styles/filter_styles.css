@@ -2,8 +2,11 @@
     --normal_button: #7a3cff;
     --dangerous_button: rgb(233, 71, 71);
     --selector_palette: #f8f8f8;
-    --filters-background: #f8f8f8;;
+    --filters-background: #f8f8f8;
+    ;
 }
+
+/* TODO: make a column field to choose the column it effects */
 
 .multiple-filters-container {
     position: absolute;

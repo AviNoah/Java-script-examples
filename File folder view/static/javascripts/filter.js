@@ -73,7 +73,7 @@ function populateFilter(container, filter_data) {
         if (option.value === method)
             option.selected = true;
 
-        selectorMethod.appendChild(option);
+        selectorColumn.appendChild(option);
     });
 
     const selectorMethod = document.createElement('select');

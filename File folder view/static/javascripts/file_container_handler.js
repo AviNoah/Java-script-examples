@@ -50,11 +50,18 @@ function makeFileElement(container, file) {
         imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
     })
 
+    let textContainer = document.createElement('div');
+    textContainer.classList.add('file-view-text-container'); // class for defining dimensions.
+
     let textElement = document.createElement('p');
     textElement.textContent = file.name;
+    textElement.classList.add('tooltip'); // Add a class for styling
+    textElement.setAttribute('aria-label', file.name);  // Full file name when hovering
+
+    textContainer.appendChild(textElement);
 
     fileDataWrapper.appendChild(imgElement);
-    fileDataWrapper.appendChild(textElement);
+    fileDataWrapper.appendChild(textContainer);
 
     let buttonsWrapper = document.createElement('div');
     buttonsWrapper.classList.add("file-view-buttons")

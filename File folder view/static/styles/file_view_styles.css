@@ -24,6 +24,27 @@
     max-width: 150px;
 }
 
+.file-view-text-container {
+    /* Define maximum text dimensions */
+    width: 150px;
+    height: 55px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-view-text-container p.tooltip {
+    text-align: center;
+    white-space: nowrap;
+    /* Prevent text from wrapping */
+    overflow: hidden;
+    /* Hide overflowing content */
+    text-overflow: ellipsis;
+    /* Show ellipsis for truncated text */
+    margin: 0;
+    /* Remove default margin for better styling */
+}
+
 .file-view img {
     width: 128px;
     height: 128px;

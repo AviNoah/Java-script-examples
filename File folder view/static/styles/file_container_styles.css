@@ -26,7 +26,9 @@ html {
     grid-gap: var(--grid_row_gap);
 
     /* prevent pop up from overflowing from files folder container*/
-    padding: 0 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 30px;
 
     /* Required to make overflow-y work */
     max-height: 100%;

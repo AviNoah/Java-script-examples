@@ -38,6 +38,8 @@
     flex-direction: column;
     justify-content: left;
     align-items: left;
+    word-wrap: break-word;
+    max-width: 172px;
 }
 
 .filter-selector {

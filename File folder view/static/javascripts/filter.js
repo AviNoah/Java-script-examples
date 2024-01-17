@@ -9,7 +9,9 @@ const files = {
         [
             { column: "ID", method: 'regex', input: '\d+' },
             { column: "Name", method: 'contains', input: 'MyName' },
-            { column: "Surname", method: 'contains', input: 'MyFamilyName' }
+            { column: "Surname", method: 'contains', input: 'MyFamilyName' },
+            { column: "Another column with a super long name", method: 'contains', input: 'my super long input yaydyaydyayya' },
+
         ]
 }
 
@@ -149,5 +151,5 @@ function requestFileData(targetElement) {
 function requestColumns() {
     // Request columns of the selected datasheet from back-end
     // TODO: Implement later
-    return ['ID', 'Name', 'Surname']
+    return ['ID', 'Name', 'Surname', 'Another column with a super long name']
 }

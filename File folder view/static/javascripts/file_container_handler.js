@@ -1,6 +1,9 @@
 import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
 
+const path = require('path');
+const validExtensions = ['.xlsx', '.csv']
+
 export function addFiles(event, files) {
     // Get parent from event, in parent search for the div.files-folder
     const parentElement = event.target.parentElement;
@@ -13,10 +16,13 @@ export function addFiles(event, files) {
 
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
-        const fileElement = makeFileElement(filesFolderDiv, file)
-        filesFolderDiv.appendChild(fileElement);
+        const ext = path.extname(file).toLowerCase();
+        if (validExtensions.includes(ext)) {
+            // Check if the extension is valid, only add if it is.
+            const fileElement = makeFileElement(filesFolderDiv, file)
+            filesFolderDiv.appendChild(fileElement);
+        }
     });
-
 }
 
 function makeFileElement(container, file) {

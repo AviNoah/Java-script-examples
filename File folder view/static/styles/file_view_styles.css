@@ -58,6 +58,7 @@ p.tooltip {
     z-index: 2;
     text-align: center;
     border-radius: 6px;
+    margin-top: 10px;
 
     /* Handling text wrap */
     word-wrap: break-word;

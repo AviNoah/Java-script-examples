@@ -3,8 +3,6 @@
 :root {
     --items_in_row: 4;
     --grid_row_gap: 10px;
-    --max-height: 100%;
-    --max-width: 100%;
 }
 
 body,
@@ -23,8 +21,6 @@ html {
     position: relative;
     grid-template-columns: repeat(var(--items_in_row), 1fr);
     grid-gap: var(--grid_row_gap);
-    max-height: var(--max-height);
-    max-width: var(--max-width);
     overflow-y: auto;
 }
 

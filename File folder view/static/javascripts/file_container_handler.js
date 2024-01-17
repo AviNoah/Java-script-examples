@@ -16,7 +16,8 @@ export function addFiles(event, files) {
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
         const ext = file.name.split('.').pop().toLowerCase();  // Note we are removing the '.'
-        if (ext && validExtensions.includes("." + ext)) {
+        // TODO: remove the true later
+        if (true || ext && validExtensions.includes("." + ext)) {
             // Check if the extension is valid, only add if it is.
             const fileElement = makeFileElement(filesFolderDiv, file)
             filesFolderDiv.appendChild(fileElement);

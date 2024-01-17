@@ -10,7 +10,7 @@
 .filter-popup-container {
     position: absolute;
     display: inline-block;
-    z-index: 2;
+    z-index: 3;
 }
 
 /* For styling */

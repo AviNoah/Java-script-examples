@@ -24,6 +24,7 @@ html {
     position: relative;
     grid-template-columns: repeat(var(--items_in_row), 1fr);
     grid-gap: var(--grid_row_gap);
+    padding: 0 50px;
 
     /* Required to make overflow-y work */
     max-height: 100%;

@@ -1,7 +1,6 @@
 import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
 
-const path = require('path');
 const validExtensions = ['.xlsx', '.csv']
 
 export function addFiles(event, files) {
@@ -16,12 +15,14 @@ export function addFiles(event, files) {
 
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
-        const ext = path.extname(file).toLowerCase();
-        if (validExtensions.includes(ext)) {
+        const ext = file.name.split('.').pop().toLowerCase();  // Note we are removing the '.'
+        if (ext && validExtensions.includes("." + ext)) {
             // Check if the extension is valid, only add if it is.
             const fileElement = makeFileElement(filesFolderDiv, file)
             filesFolderDiv.appendChild(fileElement);
         }
+        else
+            console.log(`The file ${file.name} has an invalid extension.`)
     });
 }
 

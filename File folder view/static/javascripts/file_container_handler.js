@@ -13,6 +13,8 @@ export function addFiles(event, files) {
         return; // no file folder div found, this is not a place to dump files!
     }
 
+    const invalidFiles = [];
+
     // Populate the files folder div with files
     Array.from(files).forEach(file => {
         const ext = file.name.split('.').pop().toLowerCase();  // Note we are removing the '.'
@@ -22,9 +24,14 @@ export function addFiles(event, files) {
             const fileElement = makeFileElement(filesFolderDiv, file)
             filesFolderDiv.appendChild(fileElement);
         }
-        else
-            console.log(`The file ${file.name} has an invalid extension.`)
+        else {
+            console.log(`The file ${file.name} has an invalid extension.`);
+            invalidFiles.push(file.name);
+        }
     });
+
+    if (invalidFiles.length !== 0)
+        alert(`These files were not added: ${invalidFiles.join(', ')}`);
 }
 
 function makeFileElement(container, file) {

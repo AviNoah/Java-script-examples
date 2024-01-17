@@ -19,6 +19,8 @@
     background-color: var(--filters-background);
     overflow-y: auto;
     max-height: 300px;
+    margin-top: 250px;
+    margin-right: 120px;
 }
 
 

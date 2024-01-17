@@ -27,7 +27,7 @@ html {
 
     /* prevent pop up from overflowing from files folder container*/
     padding-right: 50px;
-    padding-left: 50px;
+    padding-left: 80px;
     padding-top: 30px;
 
     /* Required to make overflow-y work */

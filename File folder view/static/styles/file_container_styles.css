@@ -12,7 +12,7 @@ html {
     overflow: hidden;
 }
 
-.files-and-drag-zone-container {
+.files-and-drop-zone-container {
     height: 95%;
     width: 95%;
     justify-content: center;

@@ -33,7 +33,7 @@
     align-items: center;
 }
 
-.file-view-text-container p.tooltip {
+p.tooltip {
     text-align: center;
     white-space: nowrap;
     /* Prevent text from wrapping */
@@ -43,7 +43,34 @@
     /* Show ellipsis for truncated text */
     margin: 0;
     /* Remove default margin for better styling */
+
+    display: flex;
+    flex-direction: column;
 }
+
+.tooltip span {
+    /* When not hovered */
+    visibility: hidden;
+
+    /* tool tip design*/
+    background-color: #d8e7a6;
+    color: black;
+    z-index: 2;
+    text-align: center;
+    border-radius: 6px;
+
+    /* Handling text wrap */
+    word-wrap: break-word;
+    max-width: 150px;
+    white-space: wrap;
+    display: inline-block;
+    position: absolute;
+}
+
+.tooltip:hover span {
+    visibility: visible;
+}
+
 
 .file-view img {
     width: 128px;

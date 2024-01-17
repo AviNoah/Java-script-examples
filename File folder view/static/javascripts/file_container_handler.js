@@ -56,7 +56,11 @@ function makeFileElement(container, file) {
     let textElement = document.createElement('p');
     textElement.textContent = file.name;
     textElement.classList.add('tooltip'); // Add a class for styling
-    textElement.setAttribute('aria-label', file.name);  // Full file name when hovering
+
+    // Tool tip when hovering
+    let tooltipElement = document.createElement('span');
+    tooltipElement.textContent = file.name;
+    textElement.appendChild(tooltipElement);
 
     textContainer.appendChild(textElement);
 

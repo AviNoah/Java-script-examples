@@ -25,6 +25,8 @@ html {
     grid-template-columns: repeat(var(--items_in_row), 1fr);
     grid-gap: var(--grid_row_gap);
 
+    height: 100%;
+
     /* prevent pop up from overflowing from files folder container*/
     padding-right: 50px;
     padding-left: 80px;

@@ -10,7 +10,7 @@ def index():
 
 @app.route("/select_file")
 def file_select():
-    return render_template("file_select_grid.html")
+    return render_template("folder_file_view.html")
 
 
 @app.route("/spreadsheet_view")

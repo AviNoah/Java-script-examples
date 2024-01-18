@@ -1,0 +1,38 @@
+/* TODO: when filter pane opens the window gets stretched, this is uncouth, fix this*/
+
+:root {
+    --items_in_row: 4;
+    --grid_row_gap: 10px;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.files-and-drop-zone-container {
+    height: 95%;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+}
+
+.files-folder {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    /* prevent pop up from overflowing from files folder container*/
+    padding-right: 50px;
+    padding-left: 80px;
+    padding-top: 30px;
+
+    /* Required to make overflow-y work */
+    max-height: 100%;
+    overflow-y: auto;
+
+    /* Start at 100% */
+    height: 100%;
+}

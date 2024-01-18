@@ -1,0 +1,93 @@
+:root {
+    --normal_button: #3c70ff;
+    --dangerous_button: rgb(233, 71, 71);
+    --selector_palette: #f8f8f8;
+    --filters-background: #f8f8f8;
+    --deactivated_button: rgb(197, 195, 195);
+}
+
+/* For positioning */
+.filter-popup-container {
+    position: absolute;
+    display: inline-block;
+    z-index: 3;
+}
+
+/* For styling */
+.filter-popup-wrapper {
+    border: 1px solid;
+    background-color: var(--filters-background);
+    overflow-y: auto;
+    max-height: 300px;
+    margin-top: 250px;
+    margin-right: 120px;
+}
+
+
+.filter-wrapper {
+    padding: 10px;
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    word-wrap: break-word;
+    max-width: 172px;
+}
+
+.filter-selector {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--selector_palette)
+}
+
+.filter-option {
+    background-color: var(--selector_palette)
+}
+
+.filter-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.filter-input input:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-buttons button {
+    /* Specific styling for buttons inside the filter popup */
+    border-radius: 10px;
+    margin-top: 3px;
+    margin-left: 3px;
+    width: 80px;
+    height: 20px;
+    color: white;
+}
+
+.filter-submit {
+    background-color: var(--normal_button);
+}
+
+.filter-submit:not(.changed) {
+    background-color: var(--deactivated_button);
+}
+
+.filter-delete {
+    background-color: var(--dangerous_button);
+}

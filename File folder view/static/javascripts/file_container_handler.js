@@ -78,22 +78,32 @@ function makeFileElement(container, file) {
     buttonsWrapper.classList.add("file-view-buttons")
 
     let queryListBtn = document.createElement('img');
+    queryListBtn.classList.add('query-list');
     queryListBtn.classList.add("no-queries");  // When queries are added or changed update the class
     queryListBtn.addEventListener('click', () => populate(fileElement));
     queryListBtn.setAttribute("src", "../static/images/QueryList.svg");
     queryListBtn.setAttribute("alt", "Filter list");
 
+    let downloadBtn = document.createElement('img');
+    downloadBtn.classList.add("download")
+    downloadBtn.addEventListener("click", () =>
+        download(container, fileElement)
+    );
+    downloadBtn.setAttribute("src", "../static/images/Download.svg");
+    downloadBtn.setAttribute("alt", "Download");
+
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
     deleteBtn.addEventListener("click", () =>
         removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`)
-    )
+    );
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
 
 
     buttonsWrapper.appendChild(deleteBtn);
     buttonsWrapper.appendChild(queryListBtn);
+    buttonsWrapper.appendChild(downloadBtn);
 
     fileElement.appendChild(fileDataWrapper);
     fileElement.appendChild(buttonsWrapper);
@@ -101,6 +111,11 @@ function makeFileElement(container, file) {
     return fileElement
 }
 
+
+function download(container, fileElement) {
+    // Request the file from back-end and "download" it (copy it)
+    // TODO: implement this
+}
 
 // Don't allow any image from the site to be dragged.
 document.addEventListener('dragstart', (event) => {

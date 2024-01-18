@@ -3,6 +3,11 @@
     src: url('../fonts/Roboto/Roboto-Medium.ttf') format('truetype');
 }
 
+:root {
+    --make-svg-gray: invert(58%) sepia(12%) saturate(0%) hue-rotate(211deg) brightness(93%) contrast(91%);
+    --make-svg-red: invert(24%) sepia(38%) saturate(5794%) hue-rotate(347deg) brightness(99%) contrast(102%);
+}
+
 .file-view {
     position: relative;
     display: flex;
@@ -100,12 +105,12 @@ p.tooltip {
     cursor: pointer;
 }
 
-.no-queries {
+.query-list.no-queries {
     /* Turn gray */
-    filter: invert(58%) sepia(12%) saturate(0%) hue-rotate(211deg) brightness(93%) contrast(91%);
+    filter: var(--make-svg-gray);
 }
 
 .delete {
     /* Turn red */
-    filter: invert(24%) sepia(38%) saturate(5794%) hue-rotate(347deg) brightness(99%) contrast(102%);
+    filter: var(--make-svg-red);
 }

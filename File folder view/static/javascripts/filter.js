@@ -37,6 +37,8 @@ export function populate(targetElement) {
         filterDiv.appendChild(populateFilter(filterDiv, filter_data));
     })
 
+
+
     const container = document.createElement('div');
     container.classList.add('filter-popup-container');
     container.appendChild(filterDiv)
@@ -47,6 +49,9 @@ export function populate(targetElement) {
             container.parentElement.removeChild(container);
         }
     })
+
+    // Return whether filters were added or not
+    return Boolean(filterDiv.children.length !== 0)
 }
 
 function populateFilter(container, filter_data) {

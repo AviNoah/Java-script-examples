@@ -6,6 +6,7 @@
 :root {
     --make-svg-gray: invert(58%) sepia(12%) saturate(0%) hue-rotate(211deg) brightness(93%) contrast(91%);
     --make-svg-red: invert(24%) sepia(38%) saturate(5794%) hue-rotate(347deg) brightness(99%) contrast(102%);
+    --make-svg-black: invert(0%) sepia(93%) saturate(0%) hue-rotate(327deg) brightness(91%) contrast(107%);
 }
 
 .file-view {
@@ -103,6 +104,11 @@ p.tooltip {
     height: 24px;
     padding: 5px 0;
     cursor: pointer;
+}
+
+.query-list {
+    /* Turn black */
+    filter: var(--make-svg-black);
 }
 
 .query-list.no-queries {

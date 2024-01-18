@@ -80,7 +80,12 @@ function makeFileElement(container, file) {
     let queryListBtn = document.createElement('img');
     queryListBtn.classList.add('query-list');
     queryListBtn.classList.add("no-queries");  // When queries are added or changed update the class
-    queryListBtn.addEventListener('click', () => populate(fileElement));
+    queryListBtn.addEventListener('click', () => {
+        if (populate(fileElement))
+            queryListBtn.classList.remove('no-queries');
+        else
+            queryListBtn.classList.add("no-queries");
+    });
     queryListBtn.setAttribute("src", "../static/images/QueryList.svg");
     queryListBtn.setAttribute("alt", "Filter list");
 

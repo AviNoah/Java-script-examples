@@ -20,12 +20,9 @@ html {
 }
 
 .files-folder {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    grid-template-columns: repeat(var(--items_in_row), 1fr);
-    grid-gap: var(--grid_row_gap);
-
-    height: 100%;
 
     /* prevent pop up from overflowing from files folder container*/
     padding-right: 50px;
@@ -35,9 +32,7 @@ html {
     /* Required to make overflow-y work */
     max-height: 100%;
     overflow-y: auto;
-}
 
-/* The following code ensures that every nth item starts a new row */
-.files-folder>*:nth-child(var(--items_in_row)n) {
-    grid-column: 1 / span var(--items_in_row);
+    /* Start at 100% */
+    height: 100%;
 }

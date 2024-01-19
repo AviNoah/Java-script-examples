@@ -1,5 +1,6 @@
 import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
+import { showOptions } from "./handle_multi_select.js";
 
 const maxMultiSelect = 2;
 let selectedViews = [];
@@ -163,7 +164,8 @@ document.addEventListener("keyup", (event) => {
     if (selectedViews.length < 2) return;  // only handle multi-select
 
     // TODO: show a pop up with the available choices (merge, add, subtract) and then column of DF A and column of DF B
-    alert(`Selected items: ${selectedViews.join(', ')}`);
+    console.log(`Selected items: ${selectedViews.join(', ')}`);
+    showOptions(event);
 
     selectedViews.forEach(view => deselectImg(view));
 })

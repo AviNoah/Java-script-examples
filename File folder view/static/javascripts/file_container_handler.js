@@ -103,8 +103,10 @@ function makeFileElement(container, file) {
 
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
-    deleteBtn.addEventListener("click", () =>
-        removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`)
+    deleteBtn.addEventListener("click", () => {
+        deselectImg(imgElement);
+        removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`);
+    }
     );
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
@@ -119,7 +121,6 @@ function makeFileElement(container, file) {
 
     return fileElement
 }
-
 
 function download(container, fileElement) {
     // Request the file from back-end and "download" it (copy it)

@@ -1,6 +1,8 @@
 import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
 
+const maxMultiSelect = 2;
+const selectedViews = [];
 const validExtensions = ['.xlsx', '.csv']
 
 export function addFiles(event, files) {
@@ -46,24 +48,35 @@ function makeFileElement(container, file) {
     imgElement.setAttribute("alt", "Excel file");
     imgElement.classList.add('filter-icon')
     imgElement.addEventListener("click", (event) => {
-        if (!event.shiftKey) {
-            // Stop multi select
-            // Deselect old
-            Array.from(container.getElementsByClassName('selected-file')).forEach((img) => {
-                img.setAttribute("src", "../static/images/excel_logo_closed.svg");
-                img.classList.remove('selected-file');
-            })
+        function selectImg(img) {
+            if (selectedViews.length == maxMultiSelect) {
+                // Remove the last selected file
+                deselectImg(selectedViews.at(-1));
+            }
+
+            img.setAttribute("src", "../static/images/excel_logo_opened.svg");
+            img.classList.add('selected-file');
+
+            selectedViews.append(img);
         }
 
+        function deselectImg(img) {
+            img.setAttribute("src", "../static/images/excel_logo_closed.svg");
+            img.classList.remove('selected-file');
+
+            selectedViews.remove(img);
+        }
+
+        // Stop multi select
+        if (!event.shiftKey)
+            Array.from(container.getElementsByClassName('selected-file')).forEach((img) => deselectImg(img));
+
+
         // Deselect if already selected
-        if (imgElement.classList.contains('selected-file')) {
-            imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
-            imgElement.classList.remove('selected-file');
-        }
-        else {
-            imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
-            imgElement.classList.add('selected-file');
-        }
+        if (imgElement.classList.contains('selected-file'))
+            deselectImg(imgElement);
+        else
+            selectImg(imgElement);
     })
 
     let textContainer = document.createElement('div');

@@ -137,7 +137,7 @@ document.addEventListener('dragstart', (event) => {
 function selectImg(img) {
     if (selectedViews.length == maxMultiSelect) {
         // Remove the last selected file
-        deselectImg(selectedViews.at(-1));
+        deselectImg(selectedViews.at(0));
     }
 
     img.setAttribute("src", "../static/images/excel_logo_opened.svg");

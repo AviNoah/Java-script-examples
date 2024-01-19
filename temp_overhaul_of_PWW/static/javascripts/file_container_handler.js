@@ -1,6 +1,9 @@
 import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
 
+const maxMultiSelect = 2;
+let selectedViews = [];
+
 const validExtensions = ['.xlsx', '.csv']
 
 export function addFiles(event, files) {
@@ -45,16 +48,17 @@ function makeFileElement(container, file) {
     imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
     imgElement.setAttribute("alt", "Excel file");
     imgElement.classList.add('filter-icon')
-    imgElement.addEventListener("click", () => {
-        // Deselect old
-        Array.from(container.getElementsByClassName('selected-file')).forEach((img) => {
-            img.setAttribute("src", "../static/images/excel_logo_closed.svg");
-            img.classList.remove('selected-file');
-        })
+    imgElement.addEventListener("click", (event) => {
+        // Stop multi select
+        if (!event.shiftKey)
+            Array.from(container.getElementsByClassName('selected-file')).forEach((img) => deselectImg(img));
 
 
-        imgElement.classList.add('selected-file');
-        imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
+        // Deselect if already selected
+        if (imgElement.classList.contains('selected-file'))
+            deselectImg(imgElement);
+        else
+            selectImg(imgElement);
     })
 
     let textContainer = document.createElement('div');
@@ -99,8 +103,10 @@ function makeFileElement(container, file) {
 
     let deleteBtn = document.createElement('img');
     deleteBtn.classList.add("delete")
-    deleteBtn.addEventListener("click", () =>
-        removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`)
+    deleteBtn.addEventListener("click", () => {
+        deselectImg(imgElement);
+        removeElementFromContainer(container, fileElement, `Are you sure you wish to remove ${file.name}?`);
+    }
     );
     deleteBtn.setAttribute("src", "../static/images/Delete.svg");
     deleteBtn.setAttribute("alt", "Delete");
@@ -116,7 +122,6 @@ function makeFileElement(container, file) {
     return fileElement
 }
 
-
 function download(container, fileElement) {
     // Request the file from back-end and "download" it (copy it)
     // TODO: implement this
@@ -126,4 +131,39 @@ function download(container, fileElement) {
 document.addEventListener('dragstart', (event) => {
     if (event.target.tagName === 'IMG')
         event.preventDefault();
+})
+
+// For file selection:
+
+function selectImg(img) {
+    if (selectedViews.length == maxMultiSelect) {
+        // Remove the last selected file
+        deselectImg(selectedViews.at(0));
+    }
+
+    img.setAttribute("src", "../static/images/excel_logo_opened.svg");
+    img.classList.add('selected-file');
+
+    selectedViews.push(img);
+}
+
+function deselectImg(img) {
+    img.setAttribute("src", "../static/images/excel_logo_closed.svg");
+    img.classList.remove('selected-file');
+
+    selectedViews = selectedViews.filter(item => item !== img);
+}
+
+
+// Handle releasing the shift key
+document.addEventListener("keyup", (event) => {
+    if (event.shiftKey)
+        return;  // Shift is still held
+
+    if (selectedViews.length < 2) return;  // only handle multi-select
+
+    // TODO: show a pop up with the available choices (merge, add, subtract) and then column of DF A and column of DF B
+    alert(`Selected items: ${selectedViews.join(', ')}`);
+
+    selectedViews.forEach(view => deselectImg(view));
 })

@@ -2,7 +2,8 @@ import { populate } from "./filter.js";
 import { removeElementFromContainer } from "./common.js";
 
 const maxMultiSelect = 2;
-const selectedViews = [];
+let selectedViews = [];
+
 const validExtensions = ['.xlsx', '.csv']
 
 export function addFiles(event, files) {
@@ -48,25 +49,6 @@ function makeFileElement(container, file) {
     imgElement.setAttribute("alt", "Excel file");
     imgElement.classList.add('filter-icon')
     imgElement.addEventListener("click", (event) => {
-        function selectImg(img) {
-            if (selectedViews.length == maxMultiSelect) {
-                // Remove the last selected file
-                deselectImg(selectedViews.at(-1));
-            }
-
-            img.setAttribute("src", "../static/images/excel_logo_opened.svg");
-            img.classList.add('selected-file');
-
-            selectedViews.append(img);
-        }
-
-        function deselectImg(img) {
-            img.setAttribute("src", "../static/images/excel_logo_closed.svg");
-            img.classList.remove('selected-file');
-
-            selectedViews.remove(img);
-        }
-
         // Stop multi select
         if (!event.shiftKey)
             Array.from(container.getElementsByClassName('selected-file')).forEach((img) => deselectImg(img));
@@ -150,15 +132,37 @@ document.addEventListener('dragstart', (event) => {
         event.preventDefault();
 })
 
+// For file selection:
+
+function selectImg(img) {
+    if (selectedViews.length == maxMultiSelect) {
+        // Remove the last selected file
+        deselectImg(selectedViews.at(-1));
+    }
+
+    img.setAttribute("src", "../static/images/excel_logo_opened.svg");
+    img.classList.add('selected-file');
+
+    selectedViews.push(img);
+}
+
+function deselectImg(img) {
+    img.setAttribute("src", "../static/images/excel_logo_closed.svg");
+    img.classList.remove('selected-file');
+
+    selectedViews = selectedViews.filter(item => item !== img);
+}
+
+
 // Handle releasing the shift key
 document.addEventListener("keyup", (event) => {
     if (event.shiftKey)
         return;  // Shift is still held
 
-    const selectedElements = Array.from(document.getElementsByClassName('selected-file'));
-
-    if (selectedElements.length < 2) return;  // only handle multi-select
+    if (selectedViews.length < 2) return;  // only handle multi-select
 
     // TODO: show a pop up with the available choices (merge, add, subtract) and then column of DF A and column of DF B
-    alert(`Selected items: ${selectedElements.join(', ')}`);
+    alert(`Selected items: ${selectedViews.join(', ')}`);
+
+    selectedViews.forEach(view => deselectImg(view));
 })

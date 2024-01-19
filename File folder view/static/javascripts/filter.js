@@ -45,7 +45,7 @@ export function populate(targetElement) {
     targetElement.appendChild(container);
 
     document.addEventListener("click", (event) => {
-        if (!targetElement.contains(event.target)) {
+        if (container && !targetElement.contains(event.target)) {
             container.parentElement.removeChild(container);
         }
     })

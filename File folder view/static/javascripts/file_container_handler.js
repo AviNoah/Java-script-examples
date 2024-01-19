@@ -136,3 +136,15 @@ document.addEventListener('dragstart', (event) => {
     if (event.target.tagName === 'IMG')
         event.preventDefault();
 })
+
+// Handle releasing the shift key
+document.addEventListener("keyup", (event) => {
+    if (event.shiftKey)
+        return;  // Shift is still held
+
+    const selectedElements = Array.from(document.getElementsByClassName('selected-file'));
+
+    if (selectedElements.length < 2) return;  // only handle multi-select
+
+    alert(`Selected items: ${selectedElements.join(', ')}`)
+})

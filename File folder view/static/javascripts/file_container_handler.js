@@ -45,16 +45,25 @@ function makeFileElement(container, file) {
     imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
     imgElement.setAttribute("alt", "Excel file");
     imgElement.classList.add('filter-icon')
-    imgElement.addEventListener("click", () => {
-        // Deselect old
-        Array.from(container.getElementsByClassName('selected-file')).forEach((img) => {
-            img.setAttribute("src", "../static/images/excel_logo_closed.svg");
-            img.classList.remove('selected-file');
-        })
+    imgElement.addEventListener("click", (event) => {
+        if (!event.shiftKey) {
+            // Stop multi select
+            // Deselect old
+            Array.from(container.getElementsByClassName('selected-file')).forEach((img) => {
+                img.setAttribute("src", "../static/images/excel_logo_closed.svg");
+                img.classList.remove('selected-file');
+            })
+        }
 
-
-        imgElement.classList.add('selected-file');
-        imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
+        // Deselect if already selected
+        if (imgElement.classList.contains('selected-file')) {
+            imgElement.setAttribute("src", "../static/images/excel_logo_closed.svg");
+            imgElement.classList.remove('selected-file');
+        }
+        else {
+            imgElement.setAttribute("src", "../static/images/excel_logo_opened.svg");
+            imgElement.classList.add('selected-file');
+        }
     })
 
     let textContainer = document.createElement('div');

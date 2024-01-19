@@ -146,5 +146,6 @@ document.addEventListener("keyup", (event) => {
 
     if (selectedElements.length < 2) return;  // only handle multi-select
 
-    alert(`Selected items: ${selectedElements.join(', ')}`)
+    // TODO: show a pop up with the available choices (merge, add, subtract) and then column of DF A and column of DF B
+    alert(`Selected items: ${selectedElements.join(', ')}`);
 })

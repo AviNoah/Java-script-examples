@@ -1,0 +1,6 @@
+/* Handling the look of a selected file-view */
+.file-view.multi-selected {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px yellow;
+}

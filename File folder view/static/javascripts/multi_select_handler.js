@@ -17,19 +17,22 @@ document.addEventListener('keyup', (event) => {
 function selectElements(event) {
     if (event.target.classList.contains(".file-view")) {
         const selected = event.target.find('.file-view');
-        if (selected.classList.contains('.selected'))
-            selected.classList.remove('selected')
+        if (selected.classList.contains('.multi-selected'))
+            selected.classList.remove('multi-selected')
         else
-            selected.classList.add('selected');
+            selected.classList.add('multi-selected');
     }
 }
 
 function deSelectElements() {
-    const selectedViews = document.getElementsByClassName('.file-view .selected');
+    const selectedViews = document.getElementsByClassName('.file-view .multi-selected');
+    // Return if none were selected
+    if (selectedViews.length === 0) return;
+
     popUpWindow(selectedViews);
 
     // Deselect them
-    Array.from(selectedViews).forEach((view) => { view.classList.remove('selected') })
+    Array.from(selectedViews).forEach((view) => { view.classList.remove('multi-selected') })
 
 }
 

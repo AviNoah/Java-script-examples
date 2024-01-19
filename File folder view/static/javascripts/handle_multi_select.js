@@ -19,10 +19,14 @@ export function showOptions(event) {
     optionsDiv.style.display = 'block';
 
     // Close the options when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!optionsDiv.contains(event.target))
+    var closeOptionsHandler = (event) => {
+        if (!optionsDiv.contains(event.target)) {
             closeOptions();  // clicked outside.
-    });
+            document.removeEventListener("click", closeOptionsHandler);
+        }
+    };
+
+    document.addEventListener('click', closeOptionsHandler);
 }
 
 function getOptions() {

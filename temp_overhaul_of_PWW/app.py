@@ -26,7 +26,7 @@ def save_file(name, content) -> bool:
     folder_name, _ = os.path.splitext(name)  # discard extension
 
     path = os.path.join(parent, folder_name)
-    os.mkdir(path, exist_ok=True)  # Make sure folder exists
+    os.makedirs(path, exist_ok=True)  # Make sure folder exists
 
     file_path = os.path.join(path, name)
 

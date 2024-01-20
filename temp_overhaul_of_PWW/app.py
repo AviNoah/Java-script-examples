@@ -3,8 +3,8 @@ from flask import *
 
 import os
 import tempfile
+import base64
 
-import json
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 UPLOAD_FOLDER: str = tempfile.mkdtemp()
@@ -23,14 +23,15 @@ def save_file(file) -> bool:
     # Return whether was successful and path
     try:
         parent = app["UPLOAD_FOLDER"]
-        folder_name = os.path.basename(file.filename)
-        folder_name, _ = os.path.splitext(file.filename)  # discard extension
+        folder_name, _ = os.path.splitext(file["name"])  # discard extension
         path = os.path.join(parent, folder_name)
 
         os.mkdir(path, exist_ok=True)  # Make sure folder exists
 
-        file_path = os.path.join(path, file.filename)
-        file.save(file, file_path)
+        file_path = os.path.join(path, file["name"])
+        with open(file_path, "wb") as writable_file:
+            writable_file.write(base64.b64decode(file["content"]))
+
         return True, file_path
     except Exception as e:
         print(e)
@@ -40,16 +41,20 @@ def save_file(file) -> bool:
 @app.route("/drop_files", methods=["POST"])
 def saveDroppedFiles():
     # We should handle file extensions here too.
-    body_json = request.get_json()
-    files: list = json.load(body_json)
-    files: list = filter(
-        is_allowed_file(lambda file: is_allowed_file(file.filename)), files
-    )
+    files: list = request.get_json()
+    files: list = filter(lambda file: is_allowed_file(file["name"]), files)
 
-    for file in files:
-        save_file(file)
+    try:
+        for file in files:
+            success, file_path = save_file(file)
+            if success:
+                print(f"File '{file['name']}' saved successfully at '{file_path}'")
+            else:
+                print(f"Failed to save file '{file['name']}': {file_path}")
 
-    return request.referrer  # Don't move from page
+        return jsonify({"message": "Files added successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": f"Failed to process files: {str(e)}"}), 500
 
 
 @app.route("/")

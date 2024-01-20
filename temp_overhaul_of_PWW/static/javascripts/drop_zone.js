@@ -35,26 +35,57 @@ class DragAndDropZone extends HTMLElement {
     }
 
     handleDroppedFiles(event) {
-        const files = event.dataTransfer.files;
-        // Handle the dropped files as needed
-        console.log('Dropped Files:', files);
-        addFiles(event, files)
+        const files = Array.from(event.dataTransfer.files);
 
-        fetch('/drop_files', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(files)
-        }).then(response => {
-            if (response.status === 200)
-                console.log("Files added successfully");
-            else
-                console.error("Server didn't receive files.")
+        // Create an array of promises, each resolving to an object containing file information
+        const filesInfoPromises = files.map(file => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
 
-        }).catch(error =>
-            console.error(`These files weren't added successfully ${files}\n${error}`)
-        );
+                reader.onload = (event) => {
+                    // Resolve with an object containing file information
+                    resolve({
+                        name: file.name,
+                        lastModified: file.lastModified,
+                        lastModifiedDate: file.lastModifiedDate,
+                        webkitRelativePath: file.webkitRelativePath,
+                        size: file.size,
+                        type: file.type,
+                        content: event.target.result, // File content as base64 or text, depending on the file type
+                    });
+                };
+
+                // Read the file as ArrayBuffer
+                reader.readAsArrayBuffer(file);
+            });
+        });
+
+        // Wait for all promises to resolve
+        Promise.all(filesInfoPromises)
+            .then(filesInfo => {
+                // filesInfo is an array of objects, each containing file information and content
+                console.log('Dropped Files:', filesInfo);
+
+                // Send the filesInfo to the server
+                return fetch('/drop_files', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(filesInfo)
+                });
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Files added successfully");
+                    addFiles(event, files);  // Add files to view
+                }
+                else
+                    console.error("Server didn't receive files.");
+            })
+            .catch(error =>
+                console.error(`These files weren't added successfully ${files}\n${error}`)
+            );
     }
 }
 

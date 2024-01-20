@@ -22,7 +22,7 @@ def is_allowed_file(filename: str) -> bool:
 
 def save_file(name, content) -> bool:
     # Return whether was successful and path
-    parent = app["UPLOAD_FOLDER"]
+    parent = app.config["UPLOAD_FOLDER"]
     folder_name, _ = os.path.splitext(name)  # discard extension
 
     path = os.path.join(parent, folder_name)
@@ -45,7 +45,6 @@ def save_dropped_files():
 
         # Process each file separately
         for file in files:
-            print(file)
             if not is_allowed_file(file.filename):
                 continue  # Skip any non valid extension
 

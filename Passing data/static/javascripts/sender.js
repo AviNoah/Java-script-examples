@@ -52,7 +52,7 @@ function cookieMethod(inputData) {
 // The backend server then handles the received data and processes it accordingly.
 
 function POSTMethod(inputData) {
-    // NOTE: this method doesn't redirect to receiver.html
+    // NOTE: this method doesn't redirect to receiver.html because we handle response
 
     // This sends a POST request to the 'receiver.html' resource on the backend.
 
@@ -70,4 +70,45 @@ function POSTMethod(inputData) {
         .then(response => response.json()) // Try to parse the response body as JSON.
         .then(data => console.log(data))  // Log the parsed data. If parsing fails, this will be a failed Promise.
         .catch(error => console.error(error)); // Catch and log any errors that occurred in the Promise chain.
+}
+
+function POSTMethodFormData() {
+    const formData = new FormData();
+
+    const formPromise = new Promise((resolve) => {
+        // User text data
+        formData.append("username", "Groucho");
+        formData.append("accountnum", 123456);
+
+
+        // JavaScript file-like object, represented as blobs
+        const content = '<q id="a"><span id="b">hey!</span></q>';
+        const blob = new Blob([content], { type: "text/xml" });
+        formData.append("webmasterfile", blob);
+
+        resolve()
+    });
+
+    formPromise.then(() => {
+        fetch("url here",
+            {
+                method: "POST",
+                body: formData,
+            }
+        )
+    }).then((response) => {
+        // Check if the request was successful (status code 2xx)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Handle the response here
+        return response.json(); // Assuming the response is JSON
+    }).then((data) => {
+        // Handle the JSON data here
+        console.log(data);
+    }).catch((error) => {
+        // Handle errors here
+        console.error(error);
+    });
+
 }

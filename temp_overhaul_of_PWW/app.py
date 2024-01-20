@@ -39,26 +39,20 @@ def save_file_binary(name, content) -> bool:
 @app.route("/drop_files", methods=["POST"])
 def save_dropped_files():
     try:
-        file_names = request.form.getlist("fileNames[]")
-        file_contents = request.files.getlist("fileContents[]")
-        modification_dates = request.form.getlist("modificationDates[]")
-        creation_dates = request.form.getlist("creationDates[]")
-        file_types = request.form.getlist("fileTypes[]")
-
-        files = zip(
-            file_names, file_types, file_contents, modification_dates, creation_dates
-        )
+        files: list = request.files.values()
 
         # Process each file separately
-        for name, type, content, *_ in files:
-            if not is_allowed_file(type):
+        for file in files:
+            if not is_allowed_file(file.type):
                 continue  # Skip any non valid extension
 
-            success, file_path = save_file_binary(name, content)
+            success, file_path = save_file_binary(file.name, file)
 
             if not success:
                 return (
-                    jsonify({"error": f"Failed to save file '{name}': {file_path}"}),
+                    jsonify(
+                        {"error": f"Failed to save file '{file.name}': {file_path}"}
+                    ),
                     500,
                 )
 

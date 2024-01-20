@@ -37,51 +37,41 @@ class DragAndDropZone extends HTMLElement {
     handleDroppedFiles(event) {
         const files = Array.from(event.dataTransfer.files);
 
-        // Create an array of promises, each resolving to an object containing file information
-        const filesInfoPromises = files.map(file => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
+        // Create a FormData object
+        const formData = new FormData();
 
-                reader.onload = (event) => {
-                    // Resolve with an object containing file information
-                    resolve({
-                        name: file.name,
-                        lastModified: file.lastModified,
-                        lastModifiedDate: file.lastModifiedDate,
-                        webkitRelativePath: file.webkitRelativePath,
-                        size: file.size,
-                        type: file.type,
-                        content: event.target.result, // File content as base64 or text, depending on the file type
-                    });
-                };
+        // Append each file and its information to the FormData
+        files.forEach(file => {
+            const reader = new FileReader();
 
-                // Read the file as ArrayBuffer
-                reader.readAsArrayBuffer(file);
-            });
+            reader.onload = (event) => {
+                const fileData = new Uint8Array(event.target.result);
+                const blob = new Blob([fileData]);
+
+                // Append the file data and information to the FormData
+                formData.append('fileName', file.name);
+                formData.append('fileContents', blob);
+                formData.append('modificationDate', file.lastModifiedDate.toISOString());
+                formData.append('creationDate', file.lastModified);
+                formData.append('fileType', file.type);
+            };
+
+            // Read the file as ArrayBuffer
+            reader.readAsArrayBuffer(file);
         });
 
-        // Wait for all promises to resolve
-        Promise.all(filesInfoPromises)
-            .then(filesInfo => {
-                // filesInfo is an array of objects, each containing file information and content
-                console.log('Dropped Files into Dropzone:', filesInfo);
-
-                // Send the filesInfo to the server
-                return fetch('/drop_files', {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(filesInfo)
-                });
-            })
+        // Send the FormData to the server
+        fetch('/drop_files', {
+            method: 'POST',
+            body: formData,
+        })
             .then(response => {
                 if (response.status === 200) {
-                    console.log("Files added successfully");
+                    console.log('Files added successfully');
                     addFiles(event, files);  // Add files to view
-                }
-                else
+                } else {
                     console.error("Server didn't receive files.");
+                }
             })
             .catch(error =>
                 console.error(`These files weren't added successfully ${files}\n${error}`)

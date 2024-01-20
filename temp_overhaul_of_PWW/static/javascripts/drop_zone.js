@@ -40,8 +40,8 @@ class DragAndDropZone extends HTMLElement {
         // Create a FormData object
         const formData = new FormData();
 
-        // Append each file and its information to the FormData
-        files.forEach(file => {
+        // Create an array of Promises to track file reading
+        const filePromises = files.map(file => new Promise((resolve) => {
             const reader = new FileReader();
 
             reader.onload = (event) => {
@@ -54,17 +54,25 @@ class DragAndDropZone extends HTMLElement {
                 formData.append('modificationDates[]', file.lastModifiedDate.toISOString());
                 formData.append('creationDates[]', file.lastModified);
                 formData.append('fileTypes[]', file.type);
+
+                // Resolve the Promise after processing the file
+                resolve();
+                console.log(formData)
             };
 
             // Read the file as ArrayBuffer
             reader.readAsArrayBuffer(file);
-        });
+        }));
 
-        // Send the FormData to the server
-        fetch('/drop_files', {
-            method: 'POST',
-            body: formData,
-        })
+        // Wait for all Promises to resolve before sending FormData to the server
+        Promise.all(filePromises)
+            .then(() => {
+                // Send the FormData to the server
+                return fetch('/drop_files', {
+                    method: 'POST',
+                    body: formData,
+                });
+            })
             .then(response => {
                 if (response.status === 200) {
                     console.log('Files added successfully');
@@ -77,6 +85,7 @@ class DragAndDropZone extends HTMLElement {
                 console.error(`These files weren't added successfully ${files}\n${error}`)
             );
     }
+
 }
 
 // Define the custom element

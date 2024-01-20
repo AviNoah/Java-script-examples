@@ -13,9 +13,11 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS: set = {".xlsx", ".csv"}
 
 
-def is_allowed_file(type: str) -> bool:
+def is_allowed_file(filename: str) -> bool:
     global ALLOWED_EXTENSIONS
-    return type.lower() in ALLOWED_EXTENSIONS
+    filename = os.path.basename(filename)
+    _, ext = os.path.splitext(filename)
+    return ext.lower() in ALLOWED_EXTENSIONS
 
 
 def save_file_binary(name, content) -> bool:
@@ -43,10 +45,11 @@ def save_dropped_files():
 
         # Process each file separately
         for file in files:
-            if not is_allowed_file(file.type):
+            print(file)
+            if not is_allowed_file(file.filename):
                 continue  # Skip any non valid extension
 
-            success, file_path = save_file_binary(file.name, file)
+            success, file_path = save_file_binary(file.filename, file)
 
             if not success:
                 return (

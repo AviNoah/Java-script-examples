@@ -46,10 +46,9 @@ class DragAndDropZone extends HTMLElement {
                 const reader = new FileReader();
 
                 reader.onload = (event) => {
-                    const fileData = new Uint8Array(event.target.result);
-                    const blob = new Blob([fileData]);
+                    const blob = new Blob([event.target.result]);
 
-                    formData.append('files', blob, file.name, file.type);
+                    formData.append('files', blob);
 
                     resolve();
                 };

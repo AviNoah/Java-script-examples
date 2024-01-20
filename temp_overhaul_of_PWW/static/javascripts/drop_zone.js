@@ -49,11 +49,11 @@ class DragAndDropZone extends HTMLElement {
                 const blob = new Blob([fileData]);
 
                 // Append the file data and information to the FormData
-                formData.append('fileName', file.name);
-                formData.append('fileContents', blob);
-                formData.append('modificationDate', file.lastModifiedDate.toISOString());
-                formData.append('creationDate', file.lastModified);
-                formData.append('fileType', file.type);
+                formData.append('fileNames[]', file.name);
+                formData.append('fileContents[]', blob);
+                formData.append('modificationDates[]', file.lastModifiedDate.toISOString());
+                formData.append('creationDates[]', file.lastModified);
+                formData.append('fileTypes[]', file.type);
             };
 
             // Read the file as ArrayBuffer

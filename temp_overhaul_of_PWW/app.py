@@ -13,44 +13,54 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS: set = {".xlsx", ".csv"}
 
 
-def is_allowed_file(filename: str) -> bool:
+def is_allowed_file(type: str) -> bool:
     global ALLOWED_EXTENSIONS
-    _, ext = os.path.splitext(filename)
-    return ext.lower() in ALLOWED_EXTENSIONS
+    return type.lower() in ALLOWED_EXTENSIONS
 
 
-def save_file(file) -> bool:
+def save_file_binary(name, content) -> bool:
     # Return whether was successful and path
+    parent = app["UPLOAD_FOLDER"]
+    folder_name, _ = os.path.splitext(name)  # discard extension
+
+    path = os.path.join(parent, folder_name)
+    os.mkdir(path, exist_ok=True)  # Make sure folder exists
+
+    file_path = os.path.join(path, name)
+
     try:
-        parent = app["UPLOAD_FOLDER"]
-        folder_name, _ = os.path.splitext(file["name"])  # discard extension
-        path = os.path.join(parent, folder_name)
-
-        os.mkdir(path, exist_ok=True)  # Make sure folder exists
-
-        file_path = os.path.join(path, file["name"])
-        with open(file_path, "wb") as writable_file:
-            writable_file.write(base64.b64decode(file["content"]))
-
+        content.save(file_path)
         return True, file_path
     except Exception as e:
         print(e)
-        return False, None
+        return False, file_path
 
 
 @app.route("/drop_files", methods=["POST"])
-def saveDroppedFiles():
-    # We should handle file extensions here too.
-    files: list = request.get_json()
-    files: list = filter(lambda file: is_allowed_file(file["name"]), files)
-
+def save_dropped_files():
     try:
-        for file in files:
-            success, file_path = save_file(file)
-            if success:
-                print(f"File '{file['name']}' saved successfully at '{file_path}'")
-            else:
-                print(f"Failed to save file '{file['name']}': {file_path}")
+        file_names = request.form.getlist("fileNames[]")
+        file_contents = request.files.getlist("fileContents[]")
+        modification_dates = request.form.getlist("modificationDates[]")
+        creation_dates = request.form.getlist("creationDates[]")
+        file_types = request.form.getlist("fileTypes[]")
+
+        files = zip(
+            file_names, file_types, file_contents, modification_dates, creation_dates
+        )
+
+        # Process each file separately
+        for name, type, content, *_ in files:
+            if not is_allowed_file(type):
+                continue  # Skip any non valid extension
+
+            success, file_path = save_file_binary(name, content)
+
+            if not success:
+                return (
+                    jsonify({"error": f"Failed to save file '{name}': {file_path}"}),
+                    500,
+                )
 
         return jsonify({"message": "Files added successfully"}), 200
     except Exception as e:

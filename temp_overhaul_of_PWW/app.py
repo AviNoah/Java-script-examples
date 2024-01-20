@@ -20,7 +20,7 @@ def is_allowed_file(filename: str) -> bool:
     return ext.lower() in ALLOWED_EXTENSIONS
 
 
-def save_file_binary(name, content) -> bool:
+def save_file(name, content) -> bool:
     # Return whether was successful and path
     parent = app["UPLOAD_FOLDER"]
     folder_name, _ = os.path.splitext(name)  # discard extension
@@ -49,7 +49,7 @@ def save_dropped_files():
             if not is_allowed_file(file.filename):
                 continue  # Skip any non valid extension
 
-            success, file_path = save_file_binary(file.filename, file)
+            success, file_path = save_file(file.filename, file)
 
             if not success:
                 return (

@@ -40,50 +40,48 @@ class DragAndDropZone extends HTMLElement {
         // Create a FormData object
         const formData = new FormData();
 
-        // Create an array of Promises to track file reading
-        const filePromises = files.map(file => new Promise((resolve) => {
-            const reader = new FileReader();
+        // Keep track of file reading with Promises array
+        const filePromises = files.map(file =>
+            new Promise((resolve, reject) => {
+                const reader = new FileReader();
 
-            reader.onload = (event) => {
-                const fileData = new Uint8Array(event.target.result);
-                const blob = new Blob([fileData]);
+                reader.onload = (event) => {
+                    const fileData = new Uint8Array(event.target.result);
+                    const blob = new Blob([fileData]);
 
-                // Append the file data and information to the FormData
-                formData.append('fileNames[]', file.name);
-                formData.append('fileContents[]', blob);
-                formData.append('modificationDates[]', file.lastModifiedDate.toISOString());
-                formData.append('creationDates[]', file.lastModified);
-                formData.append('fileTypes[]', file.type);
+                    formData.append('files', blob, file.name, file.type);
 
-                // Resolve the Promise after processing the file
-                resolve();
-                console.log(formData)
-            };
+                    resolve();
+                };
 
-            // Read the file as ArrayBuffer
-            reader.readAsArrayBuffer(file);
-        }));
+                reader.onerror = (error) => {
+                    reject(error);
+                };
 
-        // Wait for all Promises to resolve before sending FormData to the server
+                reader.readAsArrayBuffer(file);
+            })
+        );
+
         Promise.all(filePromises)
             .then(() => {
-                // Send the FormData to the server
+                console.log(formData);
+
                 return fetch('/drop_files', {
                     method: 'POST',
                     body: formData,
                 });
             })
             .then(response => {
-                if (response.status === 200) {
+                if (response.ok) {
                     console.log('Files added successfully');
                     addFiles(event, files);  // Add files to view
                 } else {
                     console.error("Server didn't receive files.");
                 }
             })
-            .catch(error =>
-                console.error(`These files weren't added successfully ${files}\n${error}`)
-            );
+            .catch(error => {
+                console.error(`These files weren't added successfully ${files}\n${error}`);
+            });
     }
 
 }

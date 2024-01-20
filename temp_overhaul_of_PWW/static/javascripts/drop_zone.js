@@ -39,6 +39,22 @@ class DragAndDropZone extends HTMLElement {
         // Handle the dropped files as needed
         console.log('Dropped Files:', files);
         addFiles(event, files)
+
+        fetch('/drop_files', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(files)
+        }).then(response => {
+            if (response.status === 200)
+                console.log("Files added successfully");
+            else
+                console.error("Server didn't receive files.")
+
+        }).catch(error =>
+            console.error(`These files weren't added successfully ${files}\n${error}`)
+        );
     }
 }
 

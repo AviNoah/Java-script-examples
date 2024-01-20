@@ -64,7 +64,7 @@ class DragAndDropZone extends HTMLElement {
         Promise.all(filesInfoPromises)
             .then(filesInfo => {
                 // filesInfo is an array of objects, each containing file information and content
-                console.log('Dropped Files:', filesInfo);
+                console.log('Dropped Files into Dropzone:', filesInfo);
 
                 // Send the filesInfo to the server
                 return fetch('/drop_files', {

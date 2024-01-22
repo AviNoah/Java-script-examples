@@ -63,6 +63,12 @@ def save_dropped_files():
         return jsonify({"error": f"Failed to process files: {str(e)}"}), 500
 
 
+@app.route("/add_filter", methods=["POST"])
+def add_filter():
+    # Add the filter data to the currently selected sheet
+    ...
+
+
 @app.route("/")
 def index():
     return render_template("landing_page.html")

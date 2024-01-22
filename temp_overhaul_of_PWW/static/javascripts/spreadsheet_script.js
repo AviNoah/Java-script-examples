@@ -34,9 +34,8 @@ function process_filter(columnIndex) {
     const escapedPatternInput = escapeRegExp(patternInput);
 
     const data = { 'selection': selection, 'pattern': escapedPatternInput }
-    const url = ""; // Point to the end-point server
 
-    fetch(url, {
+    fetch("/add_filter", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

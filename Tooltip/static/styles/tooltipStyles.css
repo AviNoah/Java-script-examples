@@ -1,6 +1,10 @@
 .tooltip {
     position: relative;
     cursor: pointer;
+    text-align: center;
+    word-wrap: break-word;
+    /* Needs to be in a container */
+    max-width: 100%;
 }
 
 #tooltip {
@@ -9,10 +13,11 @@
     color: #fff;
     padding: 5px;
     border-radius: 5px;
-    display: block;
+    display: none;
     word-wrap: break-word;
+    max-width: 200px;
 }
 
-.hidden {
-    display: none;
+#tooltip.visible {
+    display: block;
 }

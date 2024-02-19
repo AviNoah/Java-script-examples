@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- To tool tip a text element, add it to the tooltip class and add data-tooltip to it -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tooltip Test</title>
+    <link rel="stylesheet" href="/styles/tooltipStyles.css" />
+    
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>
+      This is a paragraph with <span class="tooltip" data-tooltip="Tooltip for span">span</span> element.
+    </p>
+    <ul>
+      <li>This is an unordered list item</li>
+      <li>
+        <a href="#" class="tooltip" data-tooltip="Tooltip for link">This is a link</a>
+      </li>
+    </ul>
+    <ol>
+      <li>This is an ordered list item</li>
+      <li>
+        This is another ordered list item with <span class="tooltip" data-tooltip="Tooltip for another span">span</span> element.
+      </li>
+    </ol>
+    <div>
+      <p>
+        This is a <strong class="tooltip" data-tooltip="Tooltip for strong">strong</strong> text.
+      </p>
+      <blockquote class="tooltip" data-tooltip="Tooltip for blockquote">This is a blockquote</blockquote>
+    </div>
+    <p>
+      This is a paragraph with <em class="tooltip" data-tooltip="Tooltip for em">emphasized</em> text.
+    </p>
+
+    <div id="tooltip" class="hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

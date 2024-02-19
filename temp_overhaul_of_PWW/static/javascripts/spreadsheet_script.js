@@ -118,35 +118,35 @@ function updateSpreadsheetElement(sheet) {
         // Add filter-cell class to header cells
         cell.classList.add('filter-cell');
 
-        const filterImg = document.createElement('img');
-        filterImg.src = '../static/images/filter_logo.svg';
-        filterImg.classList.add("filter");
-        filterImg.alt = 'Filter';
-        filterImg.style.cursor = 'pointer';
+            const filterImg = document.createElement('img');
+            filterImg.src = '../static/images/filter_logo.svg';
+            filterImg.classList.add("filter");
+            filterImg.alt = 'Filter';
+            filterImg.style.cursor = 'pointer';
 
-        // Create a wrapper div for proper spacing
-        const wrapperDiv = document.createElement('div');
-        wrapperDiv.style.display = 'flex';
-        wrapperDiv.style.flexDirection = 'row'; // Horizontal layout
-        wrapperDiv.style.alignItems = 'center'; // Center vertically
-        wrapperDiv.style.justifyContent = 'space-between'; // Maximize horizontal space
-        wrapperDiv.style.marginRight = '5px'; // Adjust the right margin as needed
+            // Create a wrapper div for proper spacing
+            const wrapperDiv = document.createElement('div');
+            wrapperDiv.style.display = 'flex';
+            wrapperDiv.style.flexDirection = 'row'; // Horizontal layout
+            wrapperDiv.style.alignItems = 'center'; // Center vertically
+            wrapperDiv.style.justifyContent = 'space-between'; // Maximize horizontal space
+            wrapperDiv.style.marginRight = '5px'; // Adjust the right margin as needed
 
-        // Append the cell name and filter image to the wrapper div
-        const cellName = document.createTextNode(cell.textContent);
-        wrapperDiv.appendChild(cellName);
-        wrapperDiv.appendChild(filterImg);
+            // Append the cell name and filter image to the wrapper div
+            const cellName = document.createTextNode(cell.textContent);
+            wrapperDiv.appendChild(cellName);
+            wrapperDiv.appendChild(filterImg);
 
-        // Clear the original content and append the wrapper div
-        cell.innerHTML = '';
-        cell.appendChild(wrapperDiv);
+            // Clear the original content and append the wrapper div
+            cell.innerHTML = '';
+            cell.appendChild(wrapperDiv);
 
-        // Add a margin to the filter image for additional separation
-        filterImg.style.marginLeft = '5px'; // Adjust the left margin as needed
+            // Add a margin to the filter image for additional separation
+            filterImg.style.marginLeft = '5px'; // Adjust the left margin as needed
 
-        // Apply filter when the filter image is clicked
-        filterImg.addEventListener('click', (event) => applyFilter(event, cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
-    });
+            // Apply filter when the filter image is clicked
+            filterImg.addEventListener('click', (event) => applyFilter(event, cell.cellIndex + 1)); // Add 1 to cellIndex to adjust for 0-based index
+        });
 }
 
 // Function to create a filter popup element

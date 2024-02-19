@@ -1,0 +1,3 @@
+.tooltip>element {
+    /* Affect only direct children of tooltip class */
+}

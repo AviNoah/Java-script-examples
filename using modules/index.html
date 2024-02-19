@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    <span id="clickableSpan"></span>
+    <!-- You must import the script, after the module promise has been fulfilled, only then you may
+    access the exposed methods within the module. -->
+    <span id="clickableSpan" onclick="import('./scriptA.js').then(module => module.DoSomething())"></span>
 </body>
 
 </html>

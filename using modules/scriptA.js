@@ -8,6 +8,7 @@ import { add } from "./commons.js";
 function DoSomething() {
     // Since we are exposing only DoSomething to the global scope, we must define the span constant here!
     const spanEl = document.getElementById('clickableSpan');
+    console.log("Something happened!");
     spanEl.textContent = add(3, 2);
 }
 

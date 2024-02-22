@@ -42,12 +42,10 @@ const mouseOverFunc = (tooltipText, event) => {
     if (isMouseOnTooltip(event) || isTriggerElementBeingEdited(event))
         return;
 
-    const triggerElement = event.target;
-    const rect = triggerElement.getBoundingClientRect();
     const displace = 10;
 
-    let tooltipX = rect.right + displace; // Adjust 10px to the right
-    let tooltipY = rect.bottom + displace; // Adjust 10px downward
+    let tooltipX = event.clientX + displace; // Adjust 10px to the right
+    let tooltipY = event.clientY + displace; // Adjust 10px downward
 
     tooltipPopup.innerHTML = tooltipText;
 
@@ -56,10 +54,10 @@ const mouseOverFunc = (tooltipText, event) => {
 
     // Adjust popup position if it would exceed window boundaries
     if (tooltipX + width > window.innerWidth) {
-        tooltipX = rect.left - displace - width;
+        tooltipX = event.clientX - displace - width;
     }
     if (tooltipY + height > window.innerHeight) {
-        tooltipY = rect.top - displace - height;
+        tooltipY = event.clientY - displace - height;
     }
 
     tooltipPopup.style.left = tooltipX + 'px';
